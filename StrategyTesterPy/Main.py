@@ -83,12 +83,12 @@ print port_test.trades
 
 ps_test = pt.PortfolioSlice(port_test, MD1, 1)
 ps_test.price()
-ps_test.value()
+sum(ps_test.value())
 
 #Test Trade Strategy
 #Crossover in the moving averages
 reload(tsc)
-
+reload(td)
 MAD1 = md.simple_ma_md(AORD,'AORD.Close', 10, 20)
 MAD1.core_data['MAl'][0:30]
 
@@ -96,7 +96,7 @@ MAD1.core_data['AORD.Close'][56:100].plot(style = 'k--')
 MAD1.core_data['MAl'][56:100].plot(style = 'k')
 MAD1.core_data['MAs'][56:100].plot(style = 'k')
 
-plt.show()
+#plt.show()
 
 MADSlice0 = md.market_data_slice(MAD1,57)
 MADSlice1 = md.market_data_slice(MAD1,58)
@@ -106,15 +106,42 @@ MADSlice1.data[['MAl','MAs']]
 #Test updateSignal
 port1 = pt.Portfolio("port1")
 [td.name for td in port1.trades]
-trade_cash = td.Trade("Cash","Cash", 0)
-trade_cash.name
+import strategy_tester.trade as td
+reload(td)
+
+trade_cash =td.Trade("Cash","Cash", 0)
+trade_cash.notional
 port1.add_trade(trade_cash)
+[td.name for td in port1.trades]
+
+import strategy_tester.TradeStrategyClasses as tsc
+reload(tsc)
 
 TS1 = tsc.MA_Trade_Strategy(MAD1,port1,58)
+TS1.portfolio.trades
 TS1.upd_signal()
 [td.name for td in TS1.portfolio.trades]
-TS1.upd_portfolio()
+#TS1.upd_portfolio()
 [td.name for td in TS1.portfolio.trades]
 [[td.name, td.notional] for td in TS1.portfolio.trades]
-TS1.portfolio.value()
+TS1.time
+PS2 = pt.PortfolioSlice(TS1.portfolio,TS1.market_data,TS1.time)
+PS2.value()
+print TS1.result
+TS1.run_strategy()
+len(TS1.portfolio.trades)
+PS2 = pt.PortfolioSlice(TS1.portfolio,TS1.market_data,TS1.time)
+sum(PS2.value())
+
+index = TS1.result['Time']
+vals = pandas.Series(TS1.result['Value'], index = index) + 5500
+vals.plot()
+TS1.market_data.core_data['AORD.Close'].plot()
+TS1.market_data.core_data['MAl'].plot()
+TS1.market_data.core_data['MAs'].plot()
+
+plt.show()
+vals[6]
+
+
     

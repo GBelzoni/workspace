@@ -7,7 +7,7 @@ Created on Dec 6, 2012
 import market_data as md
 import trade as td
 import Portfolio as pf
-
+import pandas as pd
 
 class Trade_Strategy(object):
     '''
@@ -22,7 +22,7 @@ class Trade_Strategy(object):
         self.market_data = market_data
         self.portfolio = portfolio
         self.time = initial_time_index
- 
+        self.result = pd.DataFrame
  
 class MA_Trade_Strategy(Trade_Strategy): 
     
@@ -62,53 +62,56 @@ class MA_Trade_Strategy(Trade_Strategy):
         signal = self.upd_signal()
         trade_number = 1
         trade = None
-        print "Signal", signal
         if signal == 'buy':
             
             #Create Trade
             trade = td.Trade(name = "Trade"+str(trade_number), 
                              type = "Eq", 
-                             notional = 100)
-            print "created buy"
+                             notional = 1)
+            
             #Add to portfolio
             self.portfolio.add_trade(trade)
             
             #update cash for trade
             md_slice = md.market_data_slice(self.market_data, self.time)
-            self.portfolio.trades[0].notional += trade.value(md_slice)
+            self.portfolio.trades[0].notional -= trade.value(md_slice)
             
         elif signal == 'sell':
             
             trade = td.Trade(name = "Trade"+str(trade_number), 
                              type = "Eq", 
-                             notional = -100)
+                             notional = -1)
         
             #Add to portfolio
             self.portfolio.add_trade(trade)
             
             #update cash for trade
             md_slice = md.market_data_slice(self.market_data, self.time)
-            self.portfolio.trades[0].notional += trade.value(md_slice)
-            
+            self.portfolio.trades[0].notional -= trade.value(md_slice)
+        
+          
         
     def run_strategy(self):
         timeInd = self.time
-        maxLoop = self.market_data.core_data.
+        maxLoop = len(self.market_data.core_data)
             
-            #object@Results = data.frame( Time = 0,  Value = 0, Signal = "hold") 
-            object$Results = data.frame(matrix(nrow = (maxLoop-timeInd), ncol =3))
-            colnames(object$Results)=c("Time","Value","Signal")
-
-            for( i in 1:(maxLoop-timeInd))
-            {
-                signal = updSig(object)
-                PS = PortfolioSlice(object$MarketData  ,object$Portfolio, timeInd)
-                timeInd = object$CurrentTime
-                time = index(object$MarketData$Data)[timeInd]
-                object$Results[i,] = c(time,sum(Value(PS)),signal)
-                object = updatePortfolio(object)
-            }    
-            object$Results$Time =as.numeric(object$Results$Time)
-            return(object)
-        }
+        self.result = pd.DataFrame(columns = ('Time','Value','Signal'))
+        
+        for i in range(1,(maxLoop-timeInd+1)):
+            
+            timeInd = self.time
+            signal = self.upd_signal()
+            portfolio_slice = pf.PortfolioSlice(self.portfolio,self.market_data,self.time)
+            time = self.market_data.core_data.index[timeInd]
+            res_row = {'Time' : time,'Value' : sum(portfolio_slice.value()),'Signal' : signal}
+            
+            #This can be sped up by dimensioning the array correctly to start with
+            self.result = self.result.append(res_row, ignore_index=True)
+                        
+            #Update so next period value reflects updated portfolio
+            self.upd_portfolio()
+            self.time +=1
+            
+            
+        
         
