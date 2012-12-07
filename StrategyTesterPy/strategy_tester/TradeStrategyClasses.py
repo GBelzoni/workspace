@@ -92,6 +92,23 @@ class MA_Trade_Strategy(Trade_Strategy):
             
         
     def run_strategy(self):
-        
-        pass
+        timeInd = self.time
+        maxLoop = self.market_data.core_data.
+            
+            #object@Results = data.frame( Time = 0,  Value = 0, Signal = "hold") 
+            object$Results = data.frame(matrix(nrow = (maxLoop-timeInd), ncol =3))
+            colnames(object$Results)=c("Time","Value","Signal")
+
+            for( i in 1:(maxLoop-timeInd))
+            {
+                signal = updSig(object)
+                PS = PortfolioSlice(object$MarketData  ,object$Portfolio, timeInd)
+                timeInd = object$CurrentTime
+                time = index(object$MarketData$Data)[timeInd]
+                object$Results[i,] = c(time,sum(Value(PS)),signal)
+                object = updatePortfolio(object)
+            }    
+            object$Results$Time =as.numeric(object$Results$Time)
+            return(object)
+        }
         

@@ -27,6 +27,7 @@ class market_data(object):
             self.core_data = pandas.DataFrame(numpy.array(zoo.coredata(zooOb)), index = time_stamp, columns = names)
             self.time_stamp = time_stamp
             self.names =  names
+            #self.length = self.core_data.
             
         else:
             print "Not zoo object" 
