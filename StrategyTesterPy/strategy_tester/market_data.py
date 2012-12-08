@@ -19,18 +19,20 @@ class market_data(object):
         
 ### Takes input zoo object and makes data object with pandas Dataframe data object ###
         
-        
-        if zoo.is_zoo(zooOb)[0] == True:
-            
+        try:
+            if zoo.is_zoo(zooOb)[0] != True:
+                raise NameError('Error: Not supported object')
             names = ro.r.colnames(zooOb)
             time_stamp = zoo.index(zooOb)
             self.core_data = pandas.DataFrame(numpy.array(zoo.coredata(zooOb)), index = time_stamp, columns = names)
             self.time_stamp = time_stamp
             self.names =  names
             #self.length = self.core_data.
+        except NameError:   
+            raise        
+                               
             
-        else:
-            print "Not zoo object" 
+        
 
 class simple_ma_md(market_data):
     

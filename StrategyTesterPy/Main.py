@@ -40,6 +40,8 @@ quantmod = importr('quantmod', robject_translations = {"skeleton.TA": "skeleton_
 #Read Data
 AORD = ro.r('read.table("~/Documents/R/StrategyTester/Data/AORD.csv",header=T, sep=",")')
 AORD = zoo.as_zoo(AORD)#, order_by = ro.r.rownames(AORD))
+bool(zoo.is_zoo(AORD))
+type(AORD)
 
 #Read into ST MarketData type
 MD1 = md.market_data(AORD)
@@ -98,11 +100,12 @@ MAD1.core_data['MAs'][56:100].plot(style = 'k')
 
 #plt.show()
 
-MADSlice0 = md.market_data_slice(MAD1,57)
+MADSlice0 = md.market_data_slice(MAD1,20)
 MADSlice1 = md.market_data_slice(MAD1,58)
-MADSlice0.data[['MAl','MAs']]
+MADSlice0.data[['MAl','MAs']] == [5644.1750000000011, 5713.830]
 MADSlice1.data[['MAl','MAs']]
-
+MADSlice0.data['MAl'] == 5644.1750000000011
+x = MADSlice0.data['MAl']
 #Test updateSignal
 port1 = pt.Portfolio("port1")
 [td.name for td in port1.trades]
@@ -134,7 +137,7 @@ PS2 = pt.PortfolioSlice(TS1.portfolio,TS1.market_data,TS1.time)
 sum(PS2.value())
 
 index = TS1.result['Time']
-vals = pandas.Series(TS1.result['Value'], index = index) + 5500
+vals = pandas.Series(TS1.result['Value'], index = index) 
 vals.plot()
 TS1.market_data.core_data['AORD.Close'].plot()
 TS1.market_data.core_data['MAl'].plot()
