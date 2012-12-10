@@ -17,7 +17,6 @@ import strategy_tester.TradeStrategyClasses as tsc
 
 from strategy_tester.Portfolio import Portfolio
 
-
 reload(md)
 reload(td)
 reload(pt)
@@ -48,13 +47,11 @@ MD1 = md.market_data(AORD)
 MD1.names[0]
 type(MD1.core_data)
 
-
 #Plotting with matlibplot
 df1 = MD1.core_data['AORD.Close']
 type(df1)
 df1.plot()
 plt.show()
-
 
 MD1.core_data['AORD.Close'][0]
 MD1.core_data.ix[0]
@@ -62,10 +59,8 @@ MD1.core_data.index
 
 #Take slice of of MD
 MDSlice1 = md.market_data_slice(MD1,1)
-#MADSlice1 = md.market_data_slice(MAD1,56)
 print MDSlice1.data    
 print MDSlice1.time_stamp  
-
 
 #Create Trades and value
 trade_eq = td.Trade("TestEq","Eq", 100)

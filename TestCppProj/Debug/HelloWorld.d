@@ -1,1 +1,0 @@
-HelloWorld.d: ../HelloWorld.cpp
