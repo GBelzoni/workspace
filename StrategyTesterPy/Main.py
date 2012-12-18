@@ -126,20 +126,24 @@ TS1.time
 PS2 = pt.PortfolioSlice(TS1.portfolio,TS1.market_data,TS1.time)
 PS2.value()
 print TS1.result
+import time
+start_time = time.clock()
 TS1.run_strategy()
+print time.clock() - start_time, "seconds"
+
 len(TS1.portfolio.trades)
 PS2 = pt.PortfolioSlice(TS1.portfolio,TS1.market_data,TS1.time)
 sum(PS2.value())
 
 index = TS1.result['Time']
-vals = pandas.Series(TS1.result['Value'], index = index) 
-vals.plot()
+#vals = pandas.Series(TS1.result['Value'], index = index) 
+#vals.plot()
 TS1.market_data.core_data['AORD.Close'].plot()
 TS1.market_data.core_data['MAl'].plot()
 TS1.market_data.core_data['MAs'].plot()
-
 plt.show()
-vals[6]
+TS1.plot()
+TS1.print_trades()
 
 
     

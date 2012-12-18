@@ -7,13 +7,14 @@ Created on Dec 6, 2012
 import market_data as md
 import trade as td
 import Portfolio as pf
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 class Trade_Strategy(object):
     '''
     classdocs
     '''
-
 
     def __init__(self, market_data, portfolio, initial_time_index):
         '''
@@ -94,24 +95,38 @@ class MA_Trade_Strategy(Trade_Strategy):
     def run_strategy(self):
         timeInd = self.time
         maxLoop = len(self.market_data.core_data)
+        num_results = maxLoop - timeInd 
             
-        self.result = pd.DataFrame(columns = ('Time','Value','Signal'))
+        self.result = np.zeros((num_results,),dtype=[('Time','f4'),('Value','f4'),('Signal','a10')])
+        #pd.DataFrame(columns = ('Time','Value','Signal'))
         
-        for i in range(1,(maxLoop-timeInd+1)):
-            
+        for i in range(0,(num_results-100)):
+                     
             timeInd = self.time
             signal = self.upd_signal()
             portfolio_slice = pf.PortfolioSlice(self.portfolio,self.market_data,self.time)
             time = self.market_data.core_data.index[timeInd]
-            res_row = {'Time' : time,'Value' : sum(portfolio_slice.value()),'Signal' : signal}
-            
+            #res_row = {'Time' : time,'Value' : sum(portfolio_slice.value()),'Signal' : signal}
+            res_row = (time, sum(portfolio_slice.value()),signal)
             #This can be sped up by dimensioning the array correctly to start with
-            self.result = self.result.append(res_row, ignore_index=True)
-                        
+            #self.result = self.result.append(res_row, ignore_index=True)
+            self.result[i]  = res_row          
             #Update so next period value reflects updated portfolio
             self.upd_portfolio()
             self.time +=1
             
-            
         
+        self.result = pd.DataFrame(data = self.result) 
+    
+    def print_trades(self):
+        print [td.name for td in self.portfolio.trades]
+    
+    def plot(self):
         
+        self.market_data.core_data['AORD.Close'].plot()
+        self.market_data.core_data['MAl'].plot()
+        self.market_data.core_data['MAs'].plot()
+        plt.show()
+    
+             
+  
