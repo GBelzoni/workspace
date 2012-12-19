@@ -3,6 +3,7 @@
 	<name>StrategyTesterPy</name>
 	<comment></comment>
 	<projects>
+		<project>PythonQL</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -15,29 +15,26 @@ class market_data(object):
 #    classdocs
 #    '''
 
-    def __init__(self, zooOb):
+    def __init__(self, dataOb):
         
 ### Takes input zoo object and makes data object with pandas Dataframe data object ###
         
         try:
-            if isinstance(zooOb, ro.vectors.Matrix) == True:
-                names = ro.r.colnames(zooOb)
-                time_stamp = zoo.index(zooOb)
-                self.core_data = pandas.DataFrame(numpy.array(zoo.coredata(zooOb)), index = time_stamp, columns = names)
-                self.time_stamp = time_stamp
-                self.names =  names
-            elif isinstance(zooOb, pandas.DataFrame):
-                self.core_data = zooOb
-                self.time_stamp = zooOb.index
-                self.names = list(zooOb.columns)
+            if isinstance(dataOb, ro.vectors.Matrix) == True:
+                names = ro.r.colnames(dataOb)
+                time_stamp = zoo.index(dataOb)
+                self.core_data = pandas.DataFrame(numpy.array(zoo.coredata(dataOb)), index = time_stamp, columns = names)
+            elif isinstance(dataOb, pandas.DataFrame):
+                self.core_data = dataOb
             else:
                 raise NameError('Error: Not supported object')
-            #self.length = self.core_data.
+            
+            
+            
         except NameError:   
             raise        
                                
-            
-        
+       
 
 class simple_ma_md(market_data):
     
@@ -67,5 +64,11 @@ class market_data_slice(object):
         self.data = MD.core_data.ix[time_index]
         self.time_stamp = MD.core_data.index[time_index]
         
-
+        #variable to control how long till next period. Used to inflate cash trades
+        self.period_length = 1 
+    
+        
+    def set_period_length(self, period_length):
+               
+        self.period_length = period_length 
         

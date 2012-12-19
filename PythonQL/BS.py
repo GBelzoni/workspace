@@ -31,5 +31,6 @@ md1 = md.market_data(path1)
 
 #[plt.plot(path) for path in paths ]
 #plt.show()
- 
-        
+
+
+   

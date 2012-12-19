@@ -43,9 +43,6 @@ class GenerateLogNormalTS(GenerateData):
             for val in samples:
                 S += S*(mu+ covariance*val)
                 self.data.append(S)  
-        
-        
-                   
 
 class GenerateNormalTS(GenerateData):
     
