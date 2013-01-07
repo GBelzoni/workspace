@@ -57,11 +57,11 @@ class PortfolioSlice(object):
             
             try:
                 thisDelta = trade.delta(self.md_slice)
-                delta += thisDelta
+                delta += thisDelta * trade.notional
             except:
                 continue
             
-            return delta 
+        return delta 
         
         
 if __name__ == '__main__':

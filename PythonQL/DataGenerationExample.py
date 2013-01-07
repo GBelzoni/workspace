@@ -9,11 +9,12 @@ reload(gd)
 
 S0=1
 mu=0.05
-covariance=0.1
+covariance=0.03
 steps = 100
+stepsize = 0.01
 
-Normal = gd.GenerateNormalTS(S0, mu, covariance, steps)
-logNormal = gd.GenerateLogNormalTS(S0, mu, covariance, steps)
+Normal = gd.GenerateNormalTS(S0, mu, covariance, stepsize, steps)
+logNormal = gd.GenerateLogNormalTS(S0, mu, covariance, stepsize, steps)
 tsLN = logNormal.get_data()
 tsN = Normal.get_data()
 

@@ -64,7 +64,11 @@ class TradeEquity(Trade):
         self.price_series_label = price_series_label
     
     def price(self, market_data_slice):
-        return market_data_slice.data[self.price_series_label]  
+        return market_data_slice.data[self.price_series_label]
+    
+    def delta(self, market_data_slice):    
+        
+        return 1  
 
 class TradeVanillaEuroCall(Trade):
     
