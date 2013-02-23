@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lQuantlib -l/usr/lib/QuantLib
+LIBS := -lJoshiLibrary -lQuantLib
 

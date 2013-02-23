@@ -41,13 +41,13 @@ endif
 all: QuantlibExample
 
 dependents:
-	-cd /home/phcostello/Documents/workspace/Quantlib/Debug && $(MAKE) clean all
+	-cd /home/phcostello/Documents/workspace/JoshiLibrary/Debug && $(MAKE) clean all
 
 # Tool invocations
-QuantlibExample: $(OBJS) $(USER_OBJS) /home/phcostello/Documents/workspace/Quantlib/Debug/libQuantlib.so
+QuantlibExample: $(OBJS) $(USER_OBJS) /home/phcostello/Documents/workspace/JoshiLibrary/Debug/libJoshiLibrary.so
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++  -o "QuantlibExample" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/home/phcostello/Documents/workspace/JoshiLibrary/Debug" -L/usr/lib -o "QuantlibExample" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -58,6 +58,6 @@ clean:
 
 .PHONY: all clean dependents
 .SECONDARY:
-/home/phcostello/Documents/workspace/Quantlib/Debug/libQuantlib.so:
+/home/phcostello/Documents/workspace/JoshiLibrary/Debug/libJoshiLibrary.so:
 
 -include ../makefile.targets

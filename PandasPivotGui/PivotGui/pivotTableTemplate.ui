@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1050</width>
+    <height>684</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PandasPTGui</string>
+  </property>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>630</y>
+     <width>341</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QSplitter" name="splitter">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>9</y>
+     <width>361</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Fields</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="listFields">
+       <property name="tabKeyNavigation">
+        <bool>true</bool>
+       </property>
+       <property name="dragEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::DragDrop</enum>
+       </property>
+       <property name="defaultDropAction">
+        <enum>Qt::MoveAction</enum>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="ColLabel">
+       <property name="text">
+        <string>Columns</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="listCols">
+       <property name="tabKeyNavigation">
+        <bool>true</bool>
+       </property>
+       <property name="dragEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::DragDrop</enum>
+       </property>
+       <property name="defaultDropAction">
+        <enum>Qt::MoveAction</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Rows</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="listRows">
+       <property name="tabKeyNavigation">
+        <bool>true</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::DragDrop</enum>
+       </property>
+       <property name="defaultDropAction">
+        <enum>Qt::MoveAction</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="RowLabel">
+       <property name="text">
+        <string>Values</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="listValues">
+       <property name="tabKeyNavigation">
+        <bool>true</bool>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::DragDrop</enum>
+       </property>
+       <property name="defaultDropAction">
+        <enum>Qt::MoveAction</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>539</y>
+     <width>351</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>setState</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="update">
+      <property name="text">
+       <string>Update</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="MakePT">
+      <property name="text">
+       <string>MakePT</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QTableWidget" name="displayTable">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>20</y>
+     <width>451</width>
+     <height>501</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listFilters">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>10</y>
+     <width>161</width>
+     <height>511</height>
+    </rect>
+   </property>
+   <property name="dragDropMode">
+    <enum>QAbstractItemView::InternalMove</enum>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::MultiSelection</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="MakeFilter">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>540</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>MakeFilter</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="FilterName">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>580</y>
+     <width>341</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>update</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog</receiver>
+   <slot>updateState()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>209</x>
+     <y>563</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>212</x>
+     <y>604</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog</receiver>
+   <slot>initialise()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>557</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>98</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listCols</sender>
+   <signal>itemActivated(QListWidgetItem*)</signal>
+   <receiver>Dialog</receiver>
+   <slot>updateFilters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>162</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>401</x>
+     <y>608</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listFields</sender>
+   <signal>itemActivated(QListWidgetItem*)</signal>
+   <receiver>Dialog</receiver>
+   <slot>updateFilters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>200</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>382</x>
+     <y>627</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listRows</sender>
+   <signal>itemActivated(QListWidgetItem*)</signal>
+   <receiver>Dialog</receiver>
+   <slot>updateFilters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>302</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>637</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listValues</sender>
+   <signal>itemActivated(QListWidgetItem*)</signal>
+   <receiver>Dialog</receiver>
+   <slot>updateFilters()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>277</x>
+     <y>454</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>643</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MakeFilter</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog</receiver>
+   <slot>createFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>477</x>
+     <y>561</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>562</x>
+     <y>546</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MakePT</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog</receiver>
+   <slot>makePT()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>337</x>
+     <y>556</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>813</x>
+     <y>591</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateState()</slot>
+  <slot>initialise()</slot>
+  <slot>updateFilters()</slot>
+  <slot>createFilter()</slot>
+  <slot>makePT()</slot>
+ </slots>
+</ui>

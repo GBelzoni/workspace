@@ -3,7 +3,7 @@
 	<name>QuantlibExample</name>
 	<comment></comment>
 	<projects>
-		<project>Quantlib</project>
+		<project>JoshiLibrary</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

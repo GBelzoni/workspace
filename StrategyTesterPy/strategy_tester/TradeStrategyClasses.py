@@ -65,17 +65,19 @@ class Delta_Hedging(Trade_Strategy):
         #Update portfolio by making delta neutral
         delta = self.upd_signal()
         
-        #upd portfolio
-        name = "Hedge" + str(self.time)
-        thisHedge = td.TradeEquity(name = name,
-                                   notional = - delta, 
-                                   price_series_label = 'underlying')
+        #Define hedging trade
+        trade = {'underlying' : -delta}
         
-        self.portfolio.add_trade(thisHedge)
+        #Adjust notional to hedge
+        self.portfolio.adjustNotional(trade)
         
-        #update cash for trade
-        md_slice = md.market_data_slice(self.market_data, self.time)
-        self.portfolio.trades[0].notional -= thisHedge.value(md_slice)
+        #Adjust cash to reflect heding notional change
+        portSlice = pf.PortfolioSlice(portfolio = self.portfolio, 
+                                      market_data = self.market_data,
+                                      time_index = self.time)
+        portSlice.adjustCash(trade)
+        
+        
         
     
     def run_strategy(self):
@@ -110,7 +112,7 @@ class Delta_Hedging(Trade_Strategy):
             
             
             #Increase time to next period - make sure to inflate the cash by the interest rate
-            self.portfolio.trades[0].inflate(md_slice)
+            self.portfolio.trades['Cash'].inflate(md_slice)
             self.time +=1
             
         
@@ -311,7 +313,7 @@ if __name__ == '__main__':
         import GenerateData as gd
         import matplotlib.pyplot as plt
         
-        steps = 500
+        steps = 3000
         stepsize = 1.0/steps
         r = 0.05
         dividend = 0.0 
@@ -343,8 +345,13 @@ if __name__ == '__main__':
         #need to add to self to use in test functions
         md_slice = md.market_data_slice(md1,time_index=0)
         md_slice.data
+        
+        tradeUnderlying = td.TradeEquity('underlying',
+                                          notional= 0,
+                                          price_series_label = 'underlying')
+        
         tradeCall = td.TradeVanillaEuroCall(name = "Call",
-                                            notional = 1,
+                                            notional = 0,
                                             strike = K,
                                             expiry = expiry)
                                             
@@ -354,20 +361,25 @@ if __name__ == '__main__':
         print "delta = ", delta
         
         #Setup portfolio
-        
-        #Setup vanilla option trade
-        
-        tradeCash = td.TradeCash(name = "Cash", 
-                                 notional = 0, 
-                                 rate_label = 'rate')
-        
+        #First initialise trade type but empty portfolio
         port1 = pf.Portfolio("port1")
-        port1.add_trade(tradeCash)
+        port1.add_trade(tradeUnderlying)
         port1.add_trade(tradeCall)
         
+        #Second initialise starting value
+        initPort = {'Call':1} 
+        port1.adjustNotional(initPort)
+        delta = tradeCall.delta(md_slice) 
+        print "delta", delta
+        trade = {'underlying':-delta}
+        port1.adjustNotional(trade)
         port1Slice = pf.PortfolioSlice(portfolio = port1, 
                                     market_data= md1, 
                                     time_index = 0)
+        
+        initHedgPort = {'Call':1, "underlying":-delta}
+        port1Slice.adjustCash(initHedgPort)
+        
         
         prt1Val = port1Slice.value()
         print "Portfolio Value" , prt1Val
@@ -384,6 +396,7 @@ if __name__ == '__main__':
         
         print ts_deltaHedge.result.head(20)
         print ts_deltaHedge.result.tail(20)
-    
+        print ts_deltaHedge.portfolio.get_notional()
+        
 DeltaHedgeVanillaCallEg()
       
