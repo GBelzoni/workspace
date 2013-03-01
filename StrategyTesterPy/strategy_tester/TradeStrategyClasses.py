@@ -303,9 +303,9 @@ if __name__ == '__main__':
     
     def DeltaHedgeVanillaCallEg():
     
-        import strategy_tester.market_data as md    
-        import strategy_tester.trade as td
-        import strategy_tester.Portfolio as pf
+#        import strategy_tester.market_data as md    
+#        import strategy_tester.trade as td
+#        import strategy_tester.Portfolio as pf
         
         import numpy as np
         import pandas as pd

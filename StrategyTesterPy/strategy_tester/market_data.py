@@ -8,7 +8,27 @@ import pandas
 import rpy2.robjects as ro
 from rpy2.robjects.packages import importr
 
+import pandas.io.sql as psql
+import sqlite3
+import statsmodels.tsa.stattools as sttl
+import statsmodels.tsa as tsa
+
 zoo = importr('zoo')
+
+con = sqlite3.connect("/home/phcostello/Documents/Data/FinanceData.sqlite")
+
+
+
+def read_db(con, tableName):
+    
+    ###con is database connection object, e.g. from sqlite package. tableName is table to read###
+    
+    readTbSQL = "SELECT * FROM {}".format(tableName)
+    data = psql.read_frame(readTbSQL,  con, index_col='Date',)     
+    data.index = pandas.to_datetime(data.index)
+    
+    return(data)
+    
 
 class market_data(object):
 #    ...
