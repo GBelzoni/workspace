@@ -4,13 +4,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../main.cpp 
+../Exceptions.cpp \
+../smartPointers.cpp 
 
 OBJS += \
-./main.o 
+./Exceptions.o \
+./smartPointers.o 
 
 CPP_DEPS += \
-./main.d 
+./Exceptions.d \
+./smartPointers.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

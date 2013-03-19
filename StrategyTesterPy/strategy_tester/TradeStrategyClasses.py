@@ -193,8 +193,6 @@ class Stop_Loss(Trade_Strategy):
             
         
         self.result = pd.DataFrame(data = self.result)
-    
-    
  
 class MA_Trade_Strategy(Trade_Strategy): 
     
@@ -299,6 +297,142 @@ class MA_Trade_Strategy(Trade_Strategy):
         self.market_data.core_data['MAs'].plot()
         plt.show()
             
+class Pairs_Trade(Trade_Strategy): 
+    
+    ###Implements methods for MA trade strategy ###
+    
+    def __init__(self, market_data, portfolio, initial_time_index):
+        '''
+        Constructor
+        '''
+        Trade_Strategy.__init__(self, market_data, portfolio, initial_time_index)
+        self.tradeEnteredFlag = False
+        
+    def upd_signal(self):
+        
+        ### This returns the update signal from the current data ###
+        time = self.time
+        
+        Data0 = pf.PortfolioSlice( self.portfolio, self.market_data, time-1)
+        Data0 = Data0.md_slice.data
+        Data1 = pf.PortfolioSlice( self.portfolio, self.market_data, time)                                  
+        Data1 = Data1.md_slice.data
+        
+        #Previous vals
+        spread0  = Data0["spread"]    
+        upperEntry0 = Data0["entryUpper"]
+        upperExit0 = Data0["exitUpper"]
+        lowerEntry0 = Data0["entryLower"]
+        lowerExit0 = Data0["exitLower"]
+        
+        #Current vals
+        spread1 = Data1["spread"]
+        upperEntry1 = Data1["entryUpper"]
+        upperExit1 = Data1["exitUpper"]
+        lowerEntry1 = Data1["entryLower"]
+        lowerExit1 = Data1["exitLower"]
+        
+        #Check if there is an upcrossing this step
+        #If upcrossing then fade trade, ie sell
+        signal = ""
+        #Enter Signals
+        if  ( spread0 < upperEntry0) and ( spread1 > upperEntry1 ):
+            signal = ["Enter","sell"]
+        elif ( spread0 < lowerEntry0 ) and ( spread1 > lowerEntry1 ):
+            signal = ["Enter" , "buy"]
+        #Exit Signals
+        elif ( spread0 > upperExit0 ) and ( spread1 < upperExit1 ):
+            signal = ["Exit","buy"]
+        elif ( spread0 < lowerExit0 ) and ( spread1 > lowerExit1 ):
+            signal = ["Exit","sell"]
+        #Do nothing signal
+        else:
+            signal = ["hold","hold"]
+                    
+        return(signal)
+        
+    def upd_portfolio(self, tradeSize):
+        
+        
+        #We enter trade when crossing entry barrier and no trade on
+        #We exit signal when crossing exit barrier and trade on
+        signal = self.upd_signal()
+        entered = self.tradeEnteredFlag
+        
+        
+        if signal[1] == "sell" and  \
+         (( signal[0]=="Enter" and entered == False ) or \
+           (signal[0]=="Exit" and entered == True)):
+                      
+            #Define hedging trade
+            trade = {'spread' : - tradeSize}
+            
+            #Adjust notional to hedge
+            self.portfolio.adjustNotional(trade)
+            
+            #Adjust cash to reflect heding notional change
+            portSlice = pf.PortfolioSlice(portfolio = self.portfolio, 
+                                          market_data = self.market_data,
+                                          time_index = self.time)
+            portSlice.adjustCash(trade)
+            
+            #Set tradeEntered flag to false
+            self.tradeEnteredFlag = not(self.tradeEnteredFlag)
+        
+            
+        elif signal[1] == 'buy' and \
+        (( signal[0]=="Enter" and entered == False ) or \
+           (signal[0]=="Exit" and entered == True)):
+            
+            #Define hedging trade
+            trade = {'spread' : tradeSize}
+            
+            #Adjust notional to hedge
+            self.portfolio.adjustNotional(trade)
+            
+            #Adjust cash to reflect heding notional change
+            portSlice = pf.PortfolioSlice(portfolio = self.portfolio, 
+                                          market_data = self.market_data,
+                                          time_index = self.time)
+            portSlice.adjustCash(trade)
+            self.tradeEnteredFlag = not(self.tradeEnteredFlag)
+        
+    def run_strategy(self):
+        timeInd = self.time
+        maxLoop = len(self.market_data.core_data)
+        num_results = maxLoop - timeInd 
+            
+        self.result = np.zeros((num_results,),dtype=[('Time','a10'),('Value','f4'),('Signal','a10')])
+        #pd.DataFrame(columns = ('Time','Value','Signal'))
+        
+        for i in range(0,(num_results)):
+                     
+            timeInd = self.time
+            signal = self.upd_signal()
+            portfolio_slice = pf.PortfolioSlice(self.portfolio,self.market_data,self.time)
+            time = self.market_data.core_data.index[timeInd]
+            #res_row = {'Time' : time,'Value' : sum(portfolio_slice.value()),'Signal' : signal}
+            res_row = (str(time), sum(portfolio_slice.value()),signal[0])
+            #This can be sped up by dimensioning the array correctly to start with
+            #self.result = self.result.append(res_row, ignore_index=True)
+            self.result[i]  = res_row          
+            #Update so next period value reflects updated portfolio
+            self.upd_portfolio(tradeSize=15)
+            self.time +=1
+            
+        
+        self.result = pd.DataFrame(data = self.result) 
+    
+    def print_trades(self):
+        print [td.name for td in self.portfolio.trades]
+    
+    def plot(self):
+        
+        self.market_data.core_data['spread'].plot()
+        self.market_data.core_data['MAl'].plot()
+        self.market_data.core_data['MAs'].plot()
+        plt.show()
+
 if __name__ == '__main__':
     
     def DeltaHedgeVanillaCallEg():
@@ -398,5 +532,41 @@ if __name__ == '__main__':
         print ts_deltaHedge.result.tail(20)
         print ts_deltaHedge.portfolio.get_notional()
         
-DeltaHedgeVanillaCallEg()
+    def PairTradeSP500():
+        
+        #Setup market data
+        import sqlite3
+        con = sqlite3.connect("/home/phcostello/Documents/Data/FinanceData.sqlite")
+        SP500 = md.read_db(con, "SP500")
+        BA = md.read_db(con,"BA")
+        dim = 'Adj Close'
+        SP500AdCl = SP500[dim]
+        BAAdCl = BA[dim]
+        dataObj = pd.merge(pd.DataFrame(BAAdCl), pd.DataFrame(SP500AdCl), how='inner',left_index = True, right_index = True)
+        dataObj.columns = ['y','x']
+        pmd = md.pairs_md(dataOb=dataObj,xInd='x',yInd='y')
+        #pmd.printSummary()
+        pmd.generateTradeSigs(50, entryScale=1, exitScale=0.5)
+        #pmd.plot_spreadAndSignals()
+        
+        #Setup portfolio
+        spreadTrade = td.TradeEquity("spread", notional=0, price_series_label="spread")
+        port = pf.Portfolio("portfolio", cashAmt=100)
+        port.add_trade(spreadTrade)
+        #No more trade types
+        port.fixed_toggle()
+        
+        #Setup Strategy
+        pairsStrat = Pairs_Trade(market_data=pmd, portfolio=port, initial_time_index=0)
+        pairsStrat.run_strategy()
+        
+        print pairsStrat.result['Signal']
+        fig = plt.figure()
+        ax1= fig.add_subplot(2,1,1)
+        ax2 = fig.add_subplot(2,1,2)
+        pairsStrat.market_data.core_data[['spread','entryUpper','exitUpper','entryLower','exitLower']].plot(ax=ax1)
+        pairsStrat.result['Value'].plot(ax=ax2) 
+        plt.show()
+        
+    PairTradeSP500()
       
