@@ -18,7 +18,11 @@ class Trade_Strategy(object):
     classdocs
     '''
 
-    def __init__(self, market_data, portfolio, initial_time_index):
+    def __init__(self, 
+                 market_data, 
+                 portfolio, 
+                 initial_time_index,
+                 parameters = None):
         '''
         Constructor
         '''
@@ -26,6 +30,7 @@ class Trade_Strategy(object):
         self.portfolio = portfolio
         self.time = initial_time_index
         self.result = pd.DataFrame
+        self.parameters = parameters
         
     def upd_signal(self):
         pass
@@ -35,7 +40,6 @@ class Trade_Strategy(object):
     
     def run_strategy(self):
         pass
-
 
 class Delta_Hedging(Trade_Strategy):
     
@@ -307,6 +311,7 @@ class Pairs_Trade(Trade_Strategy):
         '''
         Trade_Strategy.__init__(self, market_data, portfolio, initial_time_index)
         self.tradeEnteredFlag = False
+        self.started = False
         
     def upd_signal(self):
         
@@ -359,6 +364,18 @@ class Pairs_Trade(Trade_Strategy):
         signal = self.upd_signal()
         entered = self.tradeEnteredFlag
         
+        #Check if started
+        if self.started == False:
+            #If not then check if spread is between entry levels, if not then don't start
+            Data = pf.PortfolioSlice( self.portfolio, self.market_data, self.time)                                  
+            Data = Data.md_slice.data
+            spread=Data['spread']
+            upperEntry = Data['entryUpper']
+            lowerEntry = Data['entryLower']
+            if lowerEntry < spread and spread < upperEntry:
+                self.started = True
+            else:
+                return
         
         if signal[1] == "sell" and  \
          (( signal[0]=="Enter" and entered == False ) or \
@@ -402,7 +419,7 @@ class Pairs_Trade(Trade_Strategy):
         maxLoop = len(self.market_data.core_data)
         num_results = maxLoop - timeInd 
             
-        self.result = np.zeros((num_results,),dtype=[('Time','a10'),('Value','f4'),('Signal','a10')])
+        self.result = np.zeros((num_results,),dtype=[('Time','datetime64'),('Value','f4'),('Signal','a10')])
         #pd.DataFrame(columns = ('Time','Value','Signal'))
         
         for i in range(0,(num_results)):
@@ -412,26 +429,105 @@ class Pairs_Trade(Trade_Strategy):
             portfolio_slice = pf.PortfolioSlice(self.portfolio,self.market_data,self.time)
             time = self.market_data.core_data.index[timeInd]
             #res_row = {'Time' : time,'Value' : sum(portfolio_slice.value()),'Signal' : signal}
-            res_row = (str(time), sum(portfolio_slice.value()),signal[0])
+            res_row = (time, sum(portfolio_slice.value()),signal[0])
             #This can be sped up by dimensioning the array correctly to start with
             #self.result = self.result.append(res_row, ignore_index=True)
             self.result[i]  = res_row          
             #Update so next period value reflects updated portfolio
-            self.upd_portfolio(tradeSize=15)
+            self.upd_portfolio(tradeSize=1)
             self.time +=1
             
+        #Format to pandas dataframe with Time index
+        self.result = pd.DataFrame(data = self.result)
+        self.result.set_index('Time',inplace=True)
         
-        self.result = pd.DataFrame(data = self.result) 
-    
     def print_trades(self):
         print [td.name for td in self.portfolio.trades]
     
-    def plot(self):
+    def get_returns(self,referenceIndex=None):
         
-        self.market_data.core_data['spread'].plot()
-        self.market_data.core_data['MAl'].plot()
-        self.market_data.core_data['MAs'].plot()
-        plt.show()
+        retsPort = pd.DataFrame(self.result['Value'].pct_change())
+        
+        if referenceIndex != None:
+            retsRef = pd.DataFrame(self.market_data.core_data[referenceIndex].pct_change())
+        else:
+            retsRef = None
+        
+        rets = pd.merge(retsPort,retsRef, left_index=True,right_index=True)
+        rets.columns = ['Portfolio','Reference']
+        
+        return rets
+        
+    def sharpe_ratio(self,marketRef=None):
+        
+        retsPort = pd.DataFrame(self.result['Value'].pct_change())
+        
+        if marketRef != None:
+            retsRef = pd.DataFrame(self.market_data.core_data[marketRef].pct_change())
+        else:
+            retsRef = 0
+        
+       # print retsPort.std()*50
+        #print retsRef.std()
+            
+        rets = retsPort - retsRef
+        #print (1+rets).cumprod().tail()
+        sr = rets.mean()/rets.std()
+        return sr
+    
+    def draw_downs(self):
+        
+        #Calculate percentag Drawdowns 
+        value = self.result['Value']
+        startt= value.index[0]
+        Max = value[startt]
+        dd = 0
+        startDd = startt
+        endDd = startt
+        lengthDd = 0
+        
+        result = [[startt,Max,dd, startDd, endDd, lengthDd]]
+        
+        for t in value.index:
+            
+            Max = max(Max,value[t])
+            if Max == value[t]:
+                startDd = t
+                dd = 0
+                
+            thisDd = (Max - value[t])/Max
+            dd = max(dd, thisDd )
+            if dd == thisDd:
+                endDd = t
+            
+            lengthDd = startDd - endDd
+            
+            thisResult = [t,Max,dd, startDd, endDd, lengthDd]
+            result.append(thisResult) 
+        
+        #Format results to dataframe
+        columns = ['Time','MaxVal','Drawdown','StartDD','EndDD','LengthDD']
+        result = pd.DataFrame(data=result, columns=columns)   
+        result.set_index('Time', inplace=True)
+        
+        return result
+
+    def max_draw_down(self):
+        
+        dd = self.draw_downs()
+        maxDD = max(dd['Drawdown'])
+        maxDDr = dd.ix[dd['Drawdown'] == maxDD]
+        
+        return maxDDr.ix[0]
+
+ 
+    def summary(self):
+        
+        print "Scaling", self.market_data.results.params[0]
+        print "Adf p-value", self.market_data.adfResids()[1]
+        print "Sharpe Ratio", self.sharpe_ratio()
+        print "MaxDrawDown (percent)", self.max_draw_down()['Drawdown']
+        
 
 if __name__ == '__main__':
     
@@ -546,6 +642,7 @@ if __name__ == '__main__':
         dataObj.columns = ['y','x']
         pmd = md.pairs_md(dataOb=dataObj,xInd='x',yInd='y')
         #pmd.printSummary()
+        pmd.fitOLS()
         pmd.generateTradeSigs(50, entryScale=1, exitScale=0.5)
         #pmd.plot_spreadAndSignals()
         
@@ -560,13 +657,29 @@ if __name__ == '__main__':
         pairsStrat = Pairs_Trade(market_data=pmd, portfolio=port, initial_time_index=0)
         pairsStrat.run_strategy()
         
-        print pairsStrat.result['Signal']
+        #print pairsStrat.result['Signal']
+        #print pairsStrat.result.index[1:10]
+        
+        #print "Sharpe Ratio", pairsStrat.sharpe_ratio()
         fig = plt.figure()
-        ax1= fig.add_subplot(2,1,1)
-        ax2 = fig.add_subplot(2,1,2)
+        ax1= fig.add_subplot(3,1,1)
+        ax2 = fig.add_subplot(3,1,2)
+        ax3= fig.add_subplot(3,1,3)
         pairsStrat.market_data.core_data[['spread','entryUpper','exitUpper','entryLower','exitLower']].plot(ax=ax1)
-        pairsStrat.result['Value'].plot(ax=ax2) 
-        plt.show()
+        pairsStrat.result['Value'].plot(ax=ax2)
+        pd.DataFrame(100*SP500AdCl/SP500AdCl[0]).plot(ax=ax2)
+        #pd.DataFrame(100*SP500AdCl/SP500AdCl[0]).plot(ax=ax3)
+        rets = pairsStrat.get_returns(referenceIndex='x')
+        rets.plot(ax=ax3)
+        #plt.show()
+        dd = pairsStrat.draw_downs()
+        #print dd['Drawdown']
+        maxDD = max(dd['Drawdown'])
+        maxDDr = dd.ix[dd['Drawdown'] == maxDD]
+        #print maxDDr.ix[1]
+        #dd.to_csv('../dd.csv', sep='\t')
+        #plt.show()
+        pairsStrat.summary()
         
     PairTradeSP500()
       

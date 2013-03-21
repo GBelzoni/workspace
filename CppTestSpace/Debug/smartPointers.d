@@ -1,0 +1,1 @@
+smartPointers.d: ../smartPointers.cpp

@@ -118,8 +118,6 @@ class PortfolioSlice(object):
         
         self.portfolio.trades['Cash'].notional -= delCash
         
-        
-        
     
     def delta(self):
         

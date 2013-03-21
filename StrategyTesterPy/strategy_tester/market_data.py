@@ -84,14 +84,24 @@ class pairs_md(market_data):
         
         #Construct base class data
         market_data.__init__(self, dataOb)   
+        self.results = None
         
+    def fitOLS(self):
         #Run OLS and create residual series
         import statsmodels.api as sm
-        x = sm.add_constant(dataOb[xInd])
-        self.results = sm.OLS(dataOb[yInd],x).fit()
+        x = sm.add_constant(self.core_data[self.xInd])
+        self.results = sm.OLS(self.core_data[self.yInd],x).fit()
         
     def printSummary(self):
         print self.results.summary()
+        
+    def adfResids(self):
+        
+        import statsmodels.api as sm
+        resid = self.results.resid
+        result = sm.tsa.adfuller(resid)
+        return result
+        
         
     def generateTradeSigs(self, windowLength, entryScale, exitScale):
         
@@ -143,7 +153,7 @@ class market_data_slice(object):
 if __name__ == '__main__':
     
     def test_pairs_md():
-        #prepare data
+    #prepare data
         con = sqlite3.connect("/home/phcostello/Documents/Data/FinanceData.sqlite")
         SP500 = read_db(con, "SP500")
         BA = read_db(con,"BA")
@@ -154,16 +164,20 @@ if __name__ == '__main__':
         dataObj.columns = ['y','x']
         
         pmd = pairs_md(dataOb=dataObj,xInd='x',yInd='y')
-        resid = pmd.results.resid
-        resid.plot()
-        rllstd = pandas.rolling_std(resid,100,min_periods=10)
-        rllstd.plot()
-        plt.show()
+        pmd.fitOLS()
+#        resid = pmd.results.resid
+#        resid.plot()
+#        rllstd = pandas.rolling_std(resid,100,min_periods=10)
+#        rllstd.plot()
+#        plt.show()
         
         
         pmd.printSummary()
         pmd.generateTradeSigs(50, entryScale=1.5, exitScale=0)
-        pmd.plot_spreadAndSignals()
-
+        #pmd.plot_spreadAndSignals()
+        pmd.adfResids()
+        
     test_pairs_md()
+    
+    
         
