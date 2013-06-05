@@ -3,6 +3,7 @@
 	<name>CppTestSpace</name>
 	<comment></comment>
 	<projects>
+		<project>JoshiLibrary</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

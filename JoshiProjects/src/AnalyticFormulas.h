@@ -17,5 +17,48 @@ double ForwardContract( double r,
 				double Strike,
 				double Expiry);
 
+double BlackScholesCallDelta( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry);
+
+double BlackScholesPutDelta( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry);
+
+
+double BlackScholesCallTheta( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry);
+
+double BlackScholesPutTheta( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry);
+
+double BlackScholesCallRho( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry);
+
+double BlackScholesPutRho( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry);
+
 
 #endif /* ANALYTICFORMULAS_H_ */

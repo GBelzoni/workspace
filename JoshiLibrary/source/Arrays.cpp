@@ -4,9 +4,10 @@
 //
 //
 
+
+#include <algorithm>
+#include <numeric>
 #include <Arrays.h>
-#include<algorithm>
-#include<numeric>
 
 MJArray::MJArray(unsigned long size)
 : Size(size), Capacity(size)

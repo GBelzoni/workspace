@@ -14,7 +14,9 @@
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 # FOR A PARTICULAR PURPOSE. See the license for more details.
 
+
 from QuantLib import *
+
 
 # global data
 calendar = TARGET()
@@ -212,9 +214,11 @@ print dblrule
 
 
 
-formatPrice(spot.NPV(),2)
+
 discountTermStructure.linkTo(depoFuturesSwapCurve)
 forecastTermStructure.linkTo(depoFuturesSwapCurve)
+formatPrice(spot.NPV(),2)
+
 print tab + "5-years swap paying %s" % formatRate(fixedRate)
 print separator.join(headers)
 print rule

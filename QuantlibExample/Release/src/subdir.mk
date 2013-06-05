@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/Swap.cpp 
+../src/BermudanSwaption.cpp 
 
 OBJS += \
-./src/Swap.o 
+./src/BermudanSwaption.o 
 
 CPP_DEPS += \
-./src/Swap.d 
+./src/BermudanSwaption.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

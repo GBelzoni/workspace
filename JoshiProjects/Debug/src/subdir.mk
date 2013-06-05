@@ -5,15 +5,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/AnalyticFormulas.cpp \
-../src/main.cpp 
+../src/BSaliases.cpp \
+../src/TestingMCGreeks.cpp \
+../src/VanillaPayOffs.cpp 
 
 OBJS += \
 ./src/AnalyticFormulas.o \
-./src/main.o 
+./src/BSaliases.o \
+./src/TestingMCGreeks.o \
+./src/VanillaPayOffs.o 
 
 CPP_DEPS += \
 ./src/AnalyticFormulas.d \
-./src/main.d 
+./src/BSaliases.d \
+./src/TestingMCGreeks.d \
+./src/VanillaPayOffs.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

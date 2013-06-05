@@ -39,11 +39,14 @@ endif
 # All Target
 all: CppTestSpace
 
+dependents:
+	-cd /home/phcostello/Documents/workspace/JoshiLibrary/Debug && $(MAKE) all
+
 # Tool invocations
-CppTestSpace: $(OBJS) $(USER_OBJS)
+CppTestSpace: $(OBJS) $(USER_OBJS) /home/phcostello/Documents/workspace/JoshiLibrary/Debug/libJoshiLibrary.so
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++  -o "CppTestSpace" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/home/phcostello/Documents/workspace/JoshiLibrary/Debug" -o "CppTestSpace" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -54,5 +57,6 @@ clean:
 
 .PHONY: all clean dependents
 .SECONDARY:
+/home/phcostello/Documents/workspace/JoshiLibrary/Debug/libJoshiLibrary.so:
 
 -include ../makefile.targets

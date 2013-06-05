@@ -60,54 +60,57 @@ if __name__ == '__main__':
     
     def importData():
         
-#Start Time
-start = datetime(2010,1,1)
-end = datetime.date(datetime.now())
-data = DataReader(sp500constituents[0], "yahoo", start, end)
-
-
-en = enumerate(sp500constituents)
-[i for i, x in en if x=='WFMI']
-
-
-sp500constituents[200:len(sp500constituents)]
-problems = []
-dataImportProblems = []
-for series in sp500constituents[485:len(sp500constituents)]:
-    print series 
-    try:  
-        data = DataReader(series, "yahoo", start, end)
-        data = data.reset_index()
-    except:
-        print "Can't read {}".format(series)
-        dataImportProblems.append(series)
-        continue
-    con = sqlite3.connect("/home/phcostello/Documents/Data/FinanceData.sqlite")
-    try:
-        psql.write_frame( data, series, con)
-        con.commit()
-    except:
-        print "Problems with {}".format(series)
-        problems.append(series)
-    finally:
+        #Start Time
+        start = datetime(2010,1,1)
+        end = datetime.date(datetime.now())
+        data = DataReader(sp500constituents[0], "yahoo", start, end)
+        
+        
+        en = enumerate(sp500constituents)
+        [i for i, x in en if x=='WFMI']
+        
+        
+        sp500constituents[200:len(sp500constituents)]
+        problems = []
+        dataImportProblems = []
+        for series in sp500constituents[485:len(sp500constituents)]:
+            print series 
+            try:  
+                data = DataReader(series, "yahoo", start, end)
+                data = data.reset_index()
+            except:
+                print "Can't read {}".format(series)
+                dataImportProblems.append(series)
+                continue
+            con = sqlite3.connect("/home/phcostello/Documents/Data/FinanceData.sqlite")
+            try:
+                psql.write_frame( data, series, con)
+                con.commit()
+            except:
+                print "Problems with {}".format(series)
+                problems.append(series)
+            finally:
+                con.close()
+        
+        #changing tables to have date formats so RODBC driver recognizes
+        #Should check that this is occuring above.
+        con = sqlite3.connect("/home/phcostello/Documents/Data/FinanceData.sqlite")
+        for tb in sp500constituents:
+            if psql.has_table(tb, con):
+                sqltxt = "SELECT * FROM {}".format(tb)
+                #print sqltxt
+                data = psql.read_frame(sqltxt, con)
+                sqlDropTxt = 'DROP TABLE "main"."{}"'.format(tb)
+                #print sqlDropTxt
+                psql.execute(sqlDropTxt, con)
+                con.commit()
+                psql.write_frame( data, tb, con)
+                con.commit()
+        
         con.close()
 
-#changing tables to have date formats so RODBC driver recognizes
-#Should check that this is occuring above.
-con = sqlite3.connect("/home/phcostello/Documents/Data/FinanceData.sqlite")
-for tb in sp500constituents:
-    if psql.has_table(tb, con):
-        sqltxt = "SELECT * FROM {}".format(tb)
-        #print sqltxt
-        data = psql.read_frame(sqltxt, con)
-        sqlDropTxt = 'DROP TABLE "main"."{}"'.format(tb)
-        #print sqlDropTxt
-        psql.execute(sqlDropTxt, con)
-        con.commit()
-        psql.write_frame( data, tb, con)
-        con.commit()
-
-con.close()
+start = datetime(2007,1,1)
+end = datetime.date(datetime.now())
 
 data = DataReader("^GSPC", "yahoo", start, end)
 data = data.reset_index()

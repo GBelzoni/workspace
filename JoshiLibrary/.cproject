@@ -45,7 +45,7 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.so.debug.586616274" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.so.debug">
 								<option defaultValue="true" id="gnu.cpp.link.so.debug.option.shared.320611411" name="Shared (-shared)" superClass="gnu.cpp.link.so.debug.option.shared" valueType="boolean"/>
-								<option id="gnu.cpp.link.option.other.476865790" name="Other options (-Xlinker [option])" superClass="gnu.cpp.link.option.other" valueType="stringList"/>
+								<option id="gnu.cpp.link.option.other.476865790" name="Other options (-Xlinker [option])" superClass="gnu.cpp.link.option.other"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.86896678" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -58,7 +58,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="source" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="source"/>
+						<entry excluding="Vanilla2.cpp|Vanilla1.cpp|SimpleMC4.cpp|SimpleMC3.cpp|SimpleMC.cpp|PayOff2.cpp|PayOff1.cpp|DoubleDigital.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="source"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -95,6 +95,7 @@
 								<option id="gnu.cpp.compiler.option.include.paths.1011248317" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;/home/phcostello/CppCode/Code from books/C++Design_Joshi/include&quot;"/>
 								</option>
+								<option id="gnu.cpp.compiler.option.other.pic.1195236939" name="Position Independent Code (-fPIC)" superClass="gnu.cpp.compiler.option.other.pic" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1505587652" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.so.release.1383046147" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.so.release">
@@ -119,7 +120,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="source" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="source"/>
+						<entry excluding="Vanilla2.cpp|Vanilla1.cpp|SimpleMC4.cpp|SimpleMC3.cpp|SimpleMC.cpp|PayOff2.cpp|PayOff1.cpp|DoubleDigital.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="source"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -129,6 +130,16 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="JoshiLibrary.cdt.managedbuild.target.gnu.so.1197919941" name="Shared Library" projectType="cdt.managedbuild.target.gnu.so"/>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/JoshiLibrary"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/JoshiLibrary"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.so.debug.1409875382;cdt.managedbuild.config.gnu.so.debug.1409875382.;cdt.managedbuild.tool.gnu.cpp.compiler.so.debug.1821389837;cdt.managedbuild.tool.gnu.cpp.compiler.input.1339465930">
@@ -141,10 +152,7 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.so.release.281033024;cdt.managedbuild.config.gnu.so.release.281033024.;cdt.managedbuild.tool.gnu.cpp.compiler.so.release.718881337;cdt.managedbuild.tool.gnu.cpp.compiler.input.1505587652">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
-	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
