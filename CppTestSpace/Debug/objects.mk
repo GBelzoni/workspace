@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lJoshiLibrary -lsqlite3
+LIBS := -lJoshiLibrary -lsqlite3 -lQuantLib
 

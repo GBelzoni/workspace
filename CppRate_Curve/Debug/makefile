@@ -8,6 +8,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Sources/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -37,26 +38,22 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: CppRate_Curve
-
-dependents:
-	-cd /home/phcostello/Documents/workspace/JoshiLibrary/Debug && $(MAKE) all
+all: libCppRate_Curve.so
 
 # Tool invocations
-CppRate_Curve: $(OBJS) $(USER_OBJS) /home/phcostello/Documents/workspace/JoshiLibrary/Debug/libJoshiLibrary.so
+libCppRate_Curve.so: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"/home/phcostello/Documents/workspace/JoshiLibrary/Debug" -o "CppRate_Curve" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L/usr/lib -shared -o "libCppRate_Curve.so" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(C++_DEPS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) CppRate_Curve
+	-$(RM) $(OBJS)$(C++_DEPS)$(C_DEPS)$(CC_DEPS)$(LIBRARIES)$(CPP_DEPS)$(CXX_DEPS)$(C_UPPER_DEPS) libCppRate_Curve.so
 	-@echo ' '
 
 .PHONY: all clean dependents
 .SECONDARY:
-/home/phcostello/Documents/workspace/JoshiLibrary/Debug/libJoshiLibrary.so:
 
 -include ../makefile.targets

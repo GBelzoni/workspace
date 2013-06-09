@@ -46,7 +46,7 @@ dependents:
 CppTestSpace: $(OBJS) $(USER_OBJS) /home/phcostello/Documents/workspace/JoshiLibrary/Debug/libJoshiLibrary.so
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"/home/phcostello/Documents/workspace/JoshiLibrary/Debug" -o "CppTestSpace" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/home/phcostello/Documents/workspace/JoshiLibrary/Debug" -L/usr/lib -o "CppTestSpace" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

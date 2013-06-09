@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../TestSqlite.cpp 
+../TestingQLLinearInterp.cpp 
 
 OBJS += \
-./TestSqlite.o 
+./TestingQLLinearInterp.o 
 
 CPP_DEPS += \
-./TestSqlite.d 
+./TestingQLLinearInterp.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
