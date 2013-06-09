@@ -35,6 +35,7 @@ BOOST_AUTO_TEST_CASE( basic_tests )
 	df2.fromCcr(0.01,1.0);
 	df3.fromCcr(0.03,0.2);
 
+
 	curve.add_DF(df1);
 	curve.add_DF(df2);
 	curve.add_DF(df3);
@@ -58,12 +59,38 @@ BOOST_AUTO_TEST_CASE( basic_tests )
 	InstrumentDF df;
 	double dfval;
 
+
 	df = curve.get_DF(0.3);
 	dfval = df.getCcr();
 	BOOST_MESSAGE("Fitted cc rate is " << dfval);
 	df = curve.get_DF(0.8);
 	dfval = df.getCcr();
 	BOOST_MESSAGE("Fitted cc rate is " << dfval);
+
+	//Check that extrapolation is working
+	df = curve.get_DF(0.00001);
+	dfval = df.getCcr();
+	BOOST_MESSAGE("Fitted cc rate is " << dfval);
+	//works but a little strange as can't tell how extrapolating.
+	//Not holding constant zero rate outside of interp range
+
+	//Can get around by adding overnight depo
+	InstrumentDF df4;
+	df4.fromCcr(0.01,0.004); //Overnight Depo
+	curve.reset();
+	curve.add_DF(df1);
+	curve.add_DF(df2);
+	curve.add_DF(df3);
+	curve.add_DF(df4);
+
+	curve.fit_curve();
+
+	//Check that extrapolation is working
+	df = curve.get_DF(0.1); //Halfway to first rate
+	dfval = df.getCcr();
+	BOOST_MESSAGE("Fitted final cc rate is " << dfval);
+
+
 
 
 

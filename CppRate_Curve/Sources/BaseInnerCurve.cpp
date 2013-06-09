@@ -12,6 +12,7 @@
 
 BaseInnerCurve::BaseInnerCurve() : number_dfs(0) {
 
+
 }
 
 BaseInnerCurve::~BaseInnerCurve() {
@@ -78,4 +79,15 @@ BaseInnerCurve* InnerCurveForBaseTest::clone() const {
 BaseInnerCurve* InnerCurveForBaseTest::clone()  {
 
 	return new InnerCurveForBaseTest(*this);
+}
+
+void BaseInnerCurve::reset() {
+
+	curve_dfs.resize(0);
+	number_dfs = 0;
+}
+
+bool BaseInnerCurve::is_fitted() const {
+
+	return fitted;
 }

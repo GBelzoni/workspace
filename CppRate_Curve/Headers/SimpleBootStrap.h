@@ -37,8 +37,11 @@ public:
 	//For resetting shared_pointers to stack variables. make_shared not option with abc as can't construct due to virtual functions
 	static void do_nothing_deleter(BaseInnerCurve*);
 
+	void GapInDatesFinder();
 
 protected:
+
+
 
 	class BootStrapFitter
 		{
@@ -53,15 +56,13 @@ protected:
 
 		private:
 		//data curve for calcs
-		boost::shared_ptr<BaseInnerCurve> tempCurve;
+		boost::shared_ptr<BaseInnerCurve> origCurve, tempCurve;
+
 		BaseInstrument& innerInstrument;
 
 		};
 
 	friend class BootStrapFitter;
-
-
-
 
 
 };

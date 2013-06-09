@@ -23,10 +23,15 @@ public:
 	virtual std::vector<std::vector<double> > GetDFList();
 	virtual InstrumentDF get_DF( double Expiry) const= 0;
 	virtual void fit_curve() = 0;
-	virtual BaseInnerCurve* clone() const=0;
+	virtual bool is_fitted() const;
 
+
+	//Cloners
+	virtual BaseInnerCurve* clone() const=0;
 	//Need to have this if we want to modify curve later
-	virtual BaseInnerCurve* clone();
+	virtual BaseInnerCurve* clone() = 0;
+
+	virtual void reset();
 
 	int length();
 
@@ -34,6 +39,7 @@ protected:
 
 	std::vector< InstrumentDF > curve_dfs;
 	int number_dfs;
+	bool fitted;
 
 };
 

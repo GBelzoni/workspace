@@ -36,6 +36,15 @@ BOOST_AUTO_TEST_CASE( basic_tests )
 	BOOST_CHECK_CLOSE(list[0][0], 0.90, 0.01); //Check df, and that has been sorted
 	BOOST_CHECK_CLOSE(list[0][1], 0.3, 0.01); //Check expiry, and that has been sorted
 
+	//Checking reset
+	curve.reset();
+	len = curve.length();
+	BOOST_CHECK_EQUAL(len, 0);
+	curve.GetDFList();
+	BOOST_CHECK_EQUAL(curve.GetDFList().size(),0); //Check df, and that has been sorted
+
+
+
 }
 
 

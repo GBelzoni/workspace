@@ -41,8 +41,36 @@ BOOST_AUTO_TEST_CASE( GeneralInstrument )
 
 	BOOST_MESSAGE("Getters are all ok");
 
+
+
+
+
 }
 
+
+BOOST_AUTO_TEST_CASE( DepoInstrument_test )
+{
+
+	double observed_rate = 0.05;
+	double t_end = 1.0;
+
+	DepoInstrument Depo1 = DepoInstrument( observed_rate, t_end );
+
+	//Check Getters
+	BOOST_REQUIRE_CLOSE(observed_rate, Depo1.getObservedRate(), 0.01);
+	BOOST_REQUIRE_CLOSE(observed_rate, Depo1.getInitialTargetRate(), 0.01);
+	BOOST_REQUIRE_CLOSE(0.0, Depo1.getStart(), 0.01);
+	BOOST_REQUIRE_CLOSE(t_end, Depo1.getEnd(), 0.01);
+	BOOST_REQUIRE_CLOSE(2.0, Depo1.getNumFixedLegs(), 0.01);
+	BOOST_REQUIRE_CLOSE(2.0, Depo1.getNumFloatLegs(), 0.01);
+
+	BOOST_MESSAGE("Getters are all ok");
+
+
+
+
+
+}
 
 
 

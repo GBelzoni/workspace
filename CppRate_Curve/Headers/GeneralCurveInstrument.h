@@ -13,6 +13,8 @@
 class GeneralCurveInstrument: public BaseInstrument {
 public:
 
+	GeneralCurveInstrument();
+
 	GeneralCurveInstrument(double observed_rate_,
 								double initial_target_rate_,
 								double t_start_,
@@ -27,7 +29,18 @@ public:
 
 };
 
+
+class DepoInstrument: public BaseInstrument {
+public:
+
+	DepoInstrument(double observed_rate_, double t_end_);
+
+	virtual ~DepoInstrument();
+
+	virtual BaseInstrument* clone() const;
+	virtual BaseInstrument* clone() ;
+
+};
+
 #endif /* GENERALCURVEINSTRUMENT_H_ */
-
-
 

@@ -7,6 +7,12 @@
 
 #include "GeneralCurveInstrument.h"
 
+GeneralCurveInstrument::GeneralCurveInstrument()
+{
+
+}
+
+
 GeneralCurveInstrument::GeneralCurveInstrument(double observed_rate_,
 													double initial_target_rate_,
 													double t_start_,
@@ -36,4 +42,31 @@ BaseInstrument* GeneralCurveInstrument::clone() const {
 BaseInstrument* GeneralCurveInstrument::clone() {
 
 	return new GeneralCurveInstrument(*this);
+}
+
+
+//Defining Depo Instruments
+DepoInstrument::DepoInstrument(double observed_rate_, double t_end_) {
+
+	observed_rate = observed_rate_;
+	initial_target_rate = observed_rate_;
+	t_start = 0.0;
+	t_end = t_end_;
+	num_fixed_legs = 2.0;
+	num_float_legs = 2.0;
+
+}
+
+DepoInstrument::~DepoInstrument() {
+}
+
+BaseInstrument* DepoInstrument::clone() const {
+
+	return new DepoInstrument(*this);
+
+}
+
+BaseInstrument* DepoInstrument::clone() {
+
+	return new DepoInstrument(*this);
 }

@@ -20,6 +20,9 @@ public:
 	LinearZeroesInnerCurve();
 	virtual ~LinearZeroesInnerCurve();
 
+	//Need to add extra overnight df on first addition, as you need to points to interpolate
+	virtual void add_DF( InstrumentDF df);
+
 	virtual InstrumentDF get_DF( double Expiry) const;
 	virtual void fit_curve();
 	virtual BaseInnerCurve* clone() const;
@@ -30,7 +33,7 @@ protected:
 
 	std::vector<double> x,y; //You need to define x and y axis as data members as fitted interpolator uses reference so if defined in function then scope issues
 	boost::shared_ptr<QuantLib::LinearInterpolation>  fitted_linear_interpolator;
-	bool fitted;
+
 
 };
 

@@ -14,6 +14,7 @@
 #include <boost/test/unit_test.hpp>
 #include <InstrumentDF.h>
 #include <vector>
+#include <GeneralCurveInstrument.h>
 
 
 using namespace std;
@@ -29,49 +30,120 @@ BOOST_AUTO_TEST_CASE( basic_tests )
 
     //Check that can't get expiry before fitted
 	BOOST_CHECK_THROW(sp_curve.getDF(expiry1), CurveNotFitted );
-
+	//Check can't fit before have enough instruments
+	BOOST_CHECK_THROW(sp_curve.fit(), NeedMoreInstruments)
 
 	//Add two instruments
-	InstrumentDF df1,df2,df3;
+	DepoInstrument depo1(0.05,0.5);
+	DepoInstrument depo2(0.03,1.0);
+	DepoInstrument depo3(0.03,0.2);
 
-	df1.fromCcr(0.05,0.5);
-	df2.fromCcr(0.01,1.0);
-	df3.fromCcr(0.03,0.2);
+	sp_curve.addInstrument(depo1);
+	sp_curve.addInstrument(depo2);
+	sp_curve.addInstrument(depo3);
 
-//	sp_curve.addInstrument(df1);
-//	sp_curve.addInstrument(df2);
-//	sp_curve.addInstrument(df3);
-//	BOOST_MESSAGE("df1's df = " << df1.getDf());
-//	BOOST_MESSAGE("df2's df = " << df2.getDf());
-//	BOOST_MESSAGE("df3's df = " << df3.getDf());
-//
-//
-//	int len = sp_curve.length();
-//	BOOST_CHECK_EQUAL(len, 3);
-//
-////	vector<vector<double> > list = sp_curve.GetDFList();
-////	BOOST_CHECK_CLOSE(list[0][0], 0.994018, 0.01); //Check df
-////	BOOST_CHECK_CLOSE(list[0][1], 0.2, 0.01); //Check expiry
-////	BOOST_MESSAGE("Added one df instrument: Check df and expiry ok");
-//
-//	//Fit curve
-//	//QuantLib::LinearInterpolation LinInt = curve.fit_curve();
-//	sp_curve.fit();
-//	BOOST_MESSAGE("Curve Fitted");
-//	InstrumentDF df;
-//	double dfval;
-//
-//	df = sp_curve.get_DF_instrument(0.3);
-//	dfval = df.getCcr();
-//	BOOST_MESSAGE("Fitted cc rate is " << dfval);
-//	df = sp_curve.get_DF_instrument(0.8);
-//	dfval = df.getCcr();
-//	BOOST_MESSAGE("Fitted cc rate is " << dfval);
 
+	//Check length finder
+	int len = sp_curve.length();
+	BOOST_CHECK_EQUAL(len, 3);
 
 
 
 }
+
+
+BOOST_AUTO_TEST_CASE( gap_instrument_dates_test )
+{
+
+	//TODO; this isn't working
+	double expiry1 = 1;
+	LinearZeroesInnerCurve inner_curve;
+	SimpleBootStrap sp_curve(inner_curve);
+
+	//Add three instruments
+	DepoInstrument depo1(0.05,0.5);
+	DepoInstrument depo2(0.03,1.0);
+	DepoInstrument depo3(0.03,0.2);
+
+	sp_curve.addInstrument(depo1);
+	sp_curve.addInstrument(depo2);
+	sp_curve.addInstrument(depo3);
+
+	//Check Gap finder
+	//No gaps in cashflow times so shouldn't throw
+	BOOST_CHECK_NO_THROW(sp_curve.GapInDatesFinder());
+	GeneralCurveInstrument GCV = GeneralCurveInstrument( 0.06, //observed rate
+															0.06, //initial_rate
+															2.0, //start_t
+															3.0, //end_t
+															2.0, //fixed_legs
+															2.0); //float_legs
+
+	//Add instrument with gap between last curve expiry, ie depo2_t_end =1.0 and start of
+	// is GCV_t_start = 2.0
+	//Should throw
+	sp_curve.addInstrument(GCV);
+	BOOST_CHECK_THROW(sp_curve.GapInDatesFinder(), GapInstrumentTimeRange);
+
+	//Add Intrument to bridge gap and now should be fine
+	DepoInstrument depo4(0.05,3.0);
+	sp_curve.addInstrument(depo4);
+	BOOST_CHECK_NO_THROW(sp_curve.GapInDatesFinder());
+
+
+}
+
+
+BOOST_AUTO_TEST_CASE( bootstrap_test_from_depos )
+{
+
+
+	LinearZeroesInnerCurve inner_curve;
+	SimpleBootStrap sp_curve(inner_curve);
+
+	//Have caculated
+	//Add depos
+	DepoInstrument depo1(0.02,1.0);
+	DepoInstrument depo2(0.04,2.0);
+	DepoInstrument depo3(0.06,3.0);
+	DepoInstrument depo4(0.07,4.0);
+
+
+	sp_curve.addInstrument(depo1);
+	sp_curve.addInstrument(depo2);
+	sp_curve.addInstrument(depo3);
+	sp_curve.addInstrument(depo4);
+
+
+	//Check if we can fit
+	sp_curve.fit();
+	int x=1;
+
+	//Double fitting problem arghh!!
+	//BOOST_CHECK_NO_THROW(sp_curve.fit());
+
+	//Check we get rates back
+//	BOOST_CHECK_CLOSE(0.02,sp_curve.getRate(0.0,1.0,2.0,2.0),0.1);
+//	BOOST_CHECK_CLOSE(0.04,sp_curve.getRate(0.0,2.0,2.0,2.0),0.1);
+//	BOOST_CHECK_CLOSE(0.06,sp_curve.getRate(0.0,3.0,2.0,2.0),0.1);
+//	BOOST_CHECK_CLOSE(0.07,sp_curve.getRate(0.0,4.0,2.0,2.0),0.1);
+	//Check forward rates
+
+	//Check we 4year par swap
+	BOOST_CHECK_CLOSE(0.06039,sp_curve.getRate(0.0,4.0,17.0,17.0),0.1);
+
+	GeneralCurveInstrument GCV = GeneralCurveInstrument( 0.06, //observed rate
+															0.06, //initial_rate
+															2.0, //start_t
+															3.0, //end_t
+															2.0, //fixed_legs
+															2.0); //float_legs
+
+
+
+}
+
+
 
 
 BOOST_AUTO_TEST_SUITE_END()

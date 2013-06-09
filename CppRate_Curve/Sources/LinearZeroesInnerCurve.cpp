@@ -11,11 +11,30 @@
 #include <iostream>
 
 
-LinearZeroesInnerCurve::LinearZeroesInnerCurve() : fitted(false)
+LinearZeroesInnerCurve::LinearZeroesInnerCurve()
 {
+	 fitted = false;
 }
 
 LinearZeroesInnerCurve::~LinearZeroesInnerCurve() {
+}
+
+
+void LinearZeroesInnerCurve::add_DF(const InstrumentDF df) {
+
+	//If first instrument then also add o.n. rate so 2-points to interp with
+	if(this->length() ==  0)
+	{
+		double thisCcr = df.getCcr();
+		InstrumentDF overnight_Df;
+		overnight_Df.fromCcr(thisCcr, 0.004); //0.004 = 1/250 = approx dayfrac for one trading day
+		curve_dfs.push_back(overnight_Df);
+
+
+	}
+	curve_dfs.push_back(df);
+	std::sort( curve_dfs.begin(), curve_dfs.end(), InstrumentDF::ExpiryLessThan);
+
 }
 
 InstrumentDF LinearZeroesInnerCurve::get_DF(double Expiry) const
