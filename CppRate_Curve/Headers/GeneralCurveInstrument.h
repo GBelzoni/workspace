@@ -42,5 +42,20 @@ public:
 
 };
 
+
+
+class FRAInstrument: public BaseInstrument {
+public:
+
+	FRAInstrument(double observed_rate_, double t_start_, double t_end_);
+
+	virtual ~FRAInstrument();
+
+	virtual BaseInstrument* clone() const;
+	virtual BaseInstrument* clone() ;
+
+};
+
+
 #endif /* GENERALCURVEINSTRUMENT_H_ */
 

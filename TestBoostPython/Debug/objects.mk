@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lJoshiLibrary -lboost_python
+LIBS := -lCppRate_Curve -lJoshiLibrary -lboost_python
 

@@ -117,17 +117,19 @@ BOOST_AUTO_TEST_CASE( bootstrap_test_from_depos )
 
 	//Check if we can fit
 	sp_curve.fit();
-	int x=1;
-
-	//Double fitting problem arghh!!
+		//Double fitting problem arghh!!
 	//BOOST_CHECK_NO_THROW(sp_curve.fit());
 
 	//Check we get rates back
-//	BOOST_CHECK_CLOSE(0.02,sp_curve.getRate(0.0,1.0,2.0,2.0),0.1);
-//	BOOST_CHECK_CLOSE(0.04,sp_curve.getRate(0.0,2.0,2.0,2.0),0.1);
-//	BOOST_CHECK_CLOSE(0.06,sp_curve.getRate(0.0,3.0,2.0,2.0),0.1);
-//	BOOST_CHECK_CLOSE(0.07,sp_curve.getRate(0.0,4.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.02,sp_curve.getRate(0.0,1.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.04,sp_curve.getRate(0.0,2.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.06,sp_curve.getRate(0.0,3.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.07,sp_curve.getRate(0.0,4.0,2.0,2.0),0.1);
+
 	//Check forward rates
+	BOOST_CHECK_CLOSE(0.05882,sp_curve.getRate(1.0,2.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.09259,sp_curve.getRate(2.0,3.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.08474,sp_curve.getRate(3.0,4.0,2.0,2.0),0.1);
 
 	//Check we 4year par swap
 	BOOST_CHECK_CLOSE(0.06039,sp_curve.getRate(0.0,4.0,17.0,17.0),0.1);
@@ -143,6 +145,57 @@ BOOST_AUTO_TEST_CASE( bootstrap_test_from_depos )
 
 }
 
+
+BOOST_AUTO_TEST_CASE( bootstrap_test_from_fras )
+{
+
+
+	LinearZeroesInnerCurve inner_curve;
+	SimpleBootStrap sp_curve(inner_curve);
+
+	//Have caculated
+	//Add depos
+	FRAInstrument FRA1(0.02,0.0, 1.0);
+	FRAInstrument FRA2(0.05882,1.0, 2.0);
+	FRAInstrument FRA3(0.09259,2.0 ,3.0);
+	FRAInstrument FRA4(0.08474,3.0, 4.0);
+
+
+	sp_curve.addInstrument(FRA1);
+	sp_curve.addInstrument(FRA2);
+	sp_curve.addInstrument(FRA3);
+	sp_curve.addInstrument(FRA4);
+
+
+	//Check if we can fit
+	sp_curve.fit();
+	//Double fitting problem arghh!!
+	//BOOST_CHECK_NO_THROW(sp_curve.fit());
+
+	//Check we get rates back
+	BOOST_CHECK_CLOSE(0.02,sp_curve.getRate(0.0,1.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.04,sp_curve.getRate(0.0,2.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.06,sp_curve.getRate(0.0,3.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.07,sp_curve.getRate(0.0,4.0,2.0,2.0),0.1);
+
+	//Check forward rates
+	BOOST_CHECK_CLOSE(0.05882,sp_curve.getRate(1.0,2.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.09259,sp_curve.getRate(2.0,3.0,2.0,2.0),0.1);
+	BOOST_CHECK_CLOSE(0.08474,sp_curve.getRate(3.0,4.0,2.0,2.0),0.1);
+
+	//Check we 4year par swap
+	BOOST_CHECK_CLOSE(0.06039,sp_curve.getRate(0.0,4.0,17.0,17.0),0.1);
+
+	GeneralCurveInstrument GCV = GeneralCurveInstrument( 0.06, //observed rate
+															0.06, //initial_rate
+															2.0, //start_t
+															3.0, //end_t
+															2.0, //fixed_legs
+															2.0); //float_legs
+
+
+
+}
 
 
 

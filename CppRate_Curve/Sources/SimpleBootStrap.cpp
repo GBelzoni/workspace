@@ -20,6 +20,12 @@ void SimpleBootStrap::do_nothing_deleter(BaseInnerCurve*)
 	return;
 }
 
+SimpleBootStrap::SimpleBootStrap()//:innerCurve(inner_curve)
+{
+
+}
+
+
 SimpleBootStrap::SimpleBootStrap( BaseInnerCurve& inner_curve)//:innerCurve(inner_curve)
 {
 	//Set pointer to inner pointer

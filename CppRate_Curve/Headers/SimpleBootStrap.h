@@ -19,6 +19,7 @@ class SimpleBootStrap: public BaseSimpleCurve {
 
 public:
 
+	SimpleBootStrap();
 	SimpleBootStrap( BaseInnerCurve& inner_curve ); //Choose your Interptype with inner_curve
 		virtual ~SimpleBootStrap();
 

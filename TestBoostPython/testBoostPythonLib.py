@@ -24,7 +24,9 @@ zip(os.environ.keys(),os.environ.values())
 #The defaults library paths are in /etc/ld.so.conf, can add path there and then
 # sudo ldconfig. Makes it global which kinda sucks. Alternatively, can put libXX.so in one of
 # the default dirs, e.g /usr/lib or /usr/local/lib
-os.environ['LD_LIBARY_PATH'] = "${workspace_loc}/JoshiLibrary/Debug"
+#os.environ['LD_LIBARY_PATH'] = "${workspace_loc}/JoshiLibrary/Debug"
+os.environ['LD_LIBARY_PATH'] = "${workspace_loc}/TestBoostPython/Debug"
+
 
 Spot = 50.0
 Strike = 60.0   
@@ -32,8 +34,12 @@ r=0.0
 d=0.0
 Vol =0.2
 Expiry = 1.0
-import hello_ext
-from hello_ext import *
 
-greet()
-print hello_ext.BlackScholesCall( Spot, Strike, r, d, Vol, Expiry)
+#This requires that we compile the "SimpleTestExampleBoostPython.cpp" file into the BoostPythonTest.so file
+#also that we have it linked correctly in run configurations (LD_LIBRARY_PATH). I did this by copying into working dir
+
+import BoostPythonTest
+from BoostPythonTest import *
+
+print greet()
+print BoostPythonTest.BlackScholesCall( Spot, Strike, r, d, Vol, Expiry)
