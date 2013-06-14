@@ -45,12 +45,14 @@ import datetime
 #list of data range for each 
 import pandas as pd
 from pandas.io.data import DataReader
-from datetime import datetime
+from datetime import datetime, timedelta, date
+
 
 import sqlite3 
 import pandas.io.sql as psql
 import logging
 from compiler.ast import Continue
+from distutils.command.install_egg_info import safe_name
 
 
 
@@ -69,7 +71,6 @@ class DataDownloader(object):
         self.conString = conString
         self.con = None
         self.seriesList = self.__getAllSeriesInfo()
-        
     
     def connect(self): 
         ### connect to the constring data member ###
@@ -87,8 +88,6 @@ class DataDownloader(object):
     
                 print "DataDownloader.connect failed. Couldn't find 'SeriesList'"
                 print "Error %s:" % e.args[0]
-                
-            
         
     def disconnect(self):
         
@@ -202,14 +201,15 @@ class DataDownloader(object):
         
     def updateSeriesData(self,seriesNames, maxDate = None, logfile = None):
         
-#        start = datetime(2010,1,1)
-#        end = datetime.date(datetime.now())
-#    
         errortables = []
         
-        if logfile !=None:
-            logging.basicConfig(filename= logfile, filemode='w', level = logging.ERROR)
         
+        #self.updateRangeInfo(seriesNames=seriesNames)
+        
+        if logfile !=None:
+            logging.basicConfig(filename= logfile, filemode='w', level = logging.DEBUG)
+        else:
+            logging.basicConfig(level = logging.INFO)
         #Get info for series
         info = self.infoSeries(seriesNames)
         
@@ -218,9 +218,14 @@ class DataDownloader(object):
         
         for series in info.iterrows():
             
+            print "Starting loop for", series
             #Read relevant info
             series = series[1]
             endDate = pd.to_datetime(series['EndRange'])
+            if isinstance(endDate, datetime)==False:
+                continue
+            endDate = endDate.date()
+            
             seriesName = series['SeriesName']
             lookupTicker = series['LookupTicker']
             source = series['Source']
@@ -229,32 +234,40 @@ class DataDownloader(object):
             logging.info("updateData for {0}".format(seriesName))
             
             #Update Tables that have are less than maxDate
+            
+            
+            
             if endDate >= maxDate :
                 logging.info("Table {0} already up to date".format(seriesName))
-                
             else:
                 try:
-                    data = self.readData(lookupTicker, source, endDate+1, maxDate)
-                except:
-                    errortables.append[seriesName]
+                    print "trying readData"
+                    endDate += timedelta(days=1)
+                    data = self.readData(lookupTicker, source, endDate, maxDate)
+                except Exception as e:
+                    logging.error(e)
+                    errortables.append(seriesName)
                     continue
                 try:
                     self.writeFrameToDB(data, seriesName)
                 except:
-                    errortables.append[seriesName]
+                    errortables.append(seriesName)
                     continue
                 
+        #self.updateRangeInfo(seriesNames=seriesNames)
+        
         self.disconnect()
        
         return errortables
-        
         
     def readData(self, lookupTicker, source, start, end):
         
         #Read the data
         try:  
+            lookupTicker = str(lookupTicker)
             data = DataReader(lookupTicker, source , start, end)
             data = data.reset_index()
+            
             logging.info("Read ticker {}".format(lookupTicker))
         except:
             logging.error("importData: Can't read ticker {}".format(lookupTicker))
@@ -267,7 +280,7 @@ class DataDownloader(object):
         #Write to db
         try:
             self.connect()
-            psql.write_frame( df, SeriesName, self.con, if_exists='append')
+            psql.write_frame( df, SeriesName, self.con, if_exists='append', safe_names=False)
             self.con.commit()
             logging.info("Wrote series ()".format(SeriesName))
         except:
@@ -275,27 +288,27 @@ class DataDownloader(object):
             raise
         finally:
             self.disconnect()
-    
         
     def update(self, series_list):
         pass
         
   
 if __name__ == "__main__":
+
     
     conString = "/home/phcostello/Documents/Data/FinanceData.sqlite"
     dd = DataDownloader(conString)
     
-    #dd.updateRangeInfo(['HANG_SENG_INDEXx','All_Ordinaries'])#,logfile='log_range_update.txt')
+    start = datetime(2013,2,23)
+    end = (datetime.now().date())
     
-    #dd.updateSeriesData(['HANG_SENG_INDEX'])
-    
-    start = datetime(2013,2,21)
-    end = datetime.date(datetime.now())
-    
-    data = dd.readData('^AORD', 'yahoo', start, end)
-    print data
-    dd.writeFrameToDB(data, SeriesName='All_Ordinaries')
+    #print dd.readData(str('^FTSE'), 'yahoo', start, end)
+    names = [str(nm) for nm in dd.infoType('index')['SeriesName']]
+     
+    #print names
+    errortables = dd.updateSeriesData(names, end)
+    print errortables
+    dd.updateRangeInfo(names)
     
     import pandas as pd    
     l1 = ['a','b','c','h','i']
