@@ -44,3 +44,12 @@ type(data)
 isinstance(data, pandas.DataFrame)
 list(data.columns)
 type(data.index[1])
+
+#Setting/Dropping index
+import pandas as pd    
+l1 = ['a','b','c','h','i']
+l2 = ['a','b','c','d','e']
+df = pd.DataFrame(zip(l1,l2))
+
+df.set_index(keys=0,drop=False,inplace=True)
+df.reset_index( drop=True)
