@@ -1,0 +1,2 @@
+ERROR:root:updateRangeInfo: Reading table, encountered error <<no such table: HANG_SENG_INDEXxx>>
+ERROR:root:updateRangeInfo: Reading table, encountered error <<no such table: All_Ordinariesx>>

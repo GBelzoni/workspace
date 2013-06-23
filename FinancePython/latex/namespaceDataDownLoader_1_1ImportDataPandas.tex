@@ -1,0 +1,99 @@
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas}{\section{\-Data\-Down\-Loader\-:\-:\-Import\-Data\-Pandas \-Namespace \-Reference}
+\label{namespaceDataDownLoader_1_1ImportDataPandas}\index{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas@{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas}}
+}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_ac879be8d0bed3ca8287fdcd5774fc394}{def {\bfseries import\-Data}}\label{namespaceDataDownLoader_1_1ImportDataPandas_ac879be8d0bed3ca8287fdcd5774fc394}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_afcd1eb85df3ec753c659520660771a1e}{tuple {\bfseries t} = datetime.\-now()}\label{namespaceDataDownLoader_1_1ImportDataPandas_afcd1eb85df3ec753c659520660771a1e}
+
+\item 
+dictionary {\bfseries apac\-Series}
+\item 
+dictionary {\bfseries americs\-Series}
+\item 
+dictionary {\bfseries europe\-Series}
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_a5dfdfdddf89c6413041d1ef8a438c53c}{dictionary {\bfseries apac\-Series2} = \{ v \-: k for k, v in apac\-Series.\-items()\}}\label{namespaceDataDownLoader_1_1ImportDataPandas_a5dfdfdddf89c6413041d1ef8a438c53c}
+
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_abb78857642d8b684a79803998cd0cf92}{dictionary {\bfseries americs\-Series2} = \{ v \-: k for k, v in americs\-Series.\-items()\}}\label{namespaceDataDownLoader_1_1ImportDataPandas_abb78857642d8b684a79803998cd0cf92}
+
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_a346a40f93e217927c991544f0bf728af}{dictionary {\bfseries europe\-Series2} = \{ v \-: k for k, v in europe\-Series.\-items()\}}\label{namespaceDataDownLoader_1_1ImportDataPandas_a346a40f93e217927c991544f0bf728af}
+
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_aaf861cd5dd5894e2563972c425754951}{list {\bfseries sp500constituents} = \mbox{[}$\,$\mbox{]}}\label{namespaceDataDownLoader_1_1ImportDataPandas_aaf861cd5dd5894e2563972c425754951}
+
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_a98e2474ce6a8c32810559da6c911eeae}{tuple {\bfseries start} = datetime(2007,1,1)}\label{namespaceDataDownLoader_1_1ImportDataPandas_a98e2474ce6a8c32810559da6c911eeae}
+
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_a187f8e2194f06be32ad98fcb04e4c32f}{tuple {\bfseries end} = datetime.\-date(datetime.\-now())}\label{namespaceDataDownLoader_1_1ImportDataPandas_a187f8e2194f06be32ad98fcb04e4c32f}
+
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_a555262b6a333c4d13b9ad5bb8181afea}{tuple {\bfseries data} = \-Data\-Reader(\char`\"{}$^\wedge$\-G\-S\-P\-C\char`\"{}, \char`\"{}yahoo\char`\"{}, start, end)}\label{namespaceDataDownLoader_1_1ImportDataPandas_a555262b6a333c4d13b9ad5bb8181afea}
+
+\item 
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_aec16fbc08b81881172cb759afbc0b54e}{tuple {\bfseries con} = sqlite3.\-connect(\char`\"{}/home/phcostello/\-Documents/\-Data/\-Finance\-Data.\-sqlite\char`\"{})}\label{namespaceDataDownLoader_1_1ImportDataPandas_aec16fbc08b81881172cb759afbc0b54e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on Feb 21, 2013
+
+@author: phcostello
+\end{DoxyVerb}
+ 
+
+\subsection{\-Variable \-Documentation}
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_ac94edd50b87fbf14ddc3f63e0488380a}{\index{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas@{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas}!americs\-Series@{americs\-Series}}
+\index{americs\-Series@{americs\-Series}!DataDownLoader::ImportDataPandas@{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas}}
+\subsubsection[{americs\-Series}]{\setlength{\rightskip}{0pt plus 5cm}dictionary \-Data\-Down\-Loader\-::\-Import\-Data\-Pandas\-::americs\-Series}}\label{namespaceDataDownLoader_1_1ImportDataPandas_ac94edd50b87fbf14ddc3f63e0488380a}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+1 { "^MERV" : "MerVal",
+2                  "^BVSP" : "Bovespa",   
+3                  "^GSPTSE" : "S&P_TSX",
+4                  "^MXX" : "IPC",
+5                  "^GSPC" : "500_Index"}
+\end{DoxyCode}
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_af33dc089b4a238e66a3764949c952998}{\index{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas@{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas}!apac\-Series@{apac\-Series}}
+\index{apac\-Series@{apac\-Series}!DataDownLoader::ImportDataPandas@{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas}}
+\subsubsection[{apac\-Series}]{\setlength{\rightskip}{0pt plus 5cm}dictionary \-Data\-Down\-Loader\-::\-Import\-Data\-Pandas\-::apac\-Series}}\label{namespaceDataDownLoader_1_1ImportDataPandas_af33dc089b4a238e66a3764949c952998}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+1 { "^AORD" :   "All_Ordinaries",    
+2                 "^SSEC" :    "Shanghai_omposite",
+3                 "^HSI" : "HANG_SENG_INDEX",
+4                 "BSESN" : "BSE",
+5                 "^JKSE" : "Jakarta_Composite",    
+6                 "^KLSE" : "KLSE_Composite",
+7                 "^N225" : "Nikkei",
+8                 "^NZ50" : "NZSE",
+9                 "^STI" : "STRAITS _TIMES_INDEX",
+10                 "^KS11" : "KOSPI",
+11                 "^TWII" : "Taiwan_Weighted" }
+\end{DoxyCode}
+\hypertarget{namespaceDataDownLoader_1_1ImportDataPandas_ad22963cee00cd729bed24ed889c123f2}{\index{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas@{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas}!europe\-Series@{europe\-Series}}
+\index{europe\-Series@{europe\-Series}!DataDownLoader::ImportDataPandas@{\-Data\-Down\-Loader\-::\-Import\-Data\-Pandas}}
+\subsubsection[{europe\-Series}]{\setlength{\rightskip}{0pt plus 5cm}dictionary \-Data\-Down\-Loader\-::\-Import\-Data\-Pandas\-::europe\-Series}}\label{namespaceDataDownLoader_1_1ImportDataPandas_ad22963cee00cd729bed24ed889c123f2}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+1 {"^ATX" : "ATX",
+2 "^FCHI"   : "CAC" ,
+3 "^GDAXI"  :  "DAX",
+4 "AEX.AS"  :  "AEX",
+5 "^OSEAX"   : "OSE",
+6 "^OMXSPI"  :  "Stockholm_General" ,
+7 "^SSMI"  :  "Swiss_Market",
+8 "^FTSE"  :  "FTSE_100",
+9 "FPXAA.PR"   : "PX Index"}
+\end{DoxyCode}

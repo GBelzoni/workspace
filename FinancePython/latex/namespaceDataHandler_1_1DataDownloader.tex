@@ -1,0 +1,38 @@
+\hypertarget{namespaceDataHandler_1_1DataDownloader}{\section{\-Data\-Handler\-:\-:\-Data\-Downloader \-Namespace \-Reference}
+\label{namespaceDataHandler_1_1DataDownloader}\index{\-Data\-Handler\-::\-Data\-Downloader@{\-Data\-Handler\-::\-Data\-Downloader}}
+}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classDataHandler_1_1DataDownloader_1_1DataDownloader}{\-Data\-Downloader}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceDataHandler_1_1DataDownloader_a4c4c103be23ab59888c852a69de49a0d}{string {\bfseries con\-String} = \char`\"{}/home/phcostello/\-Documents/\-Data/\-Finance\-Data.\-sqlite\char`\"{}}\label{namespaceDataHandler_1_1DataDownloader_a4c4c103be23ab59888c852a69de49a0d}
+
+\item 
+\hypertarget{namespaceDataHandler_1_1DataDownloader_a8745af1e7397bb2d39353979d6e5e9dc}{tuple {\bfseries dd} = \hyperlink{classDataHandler_1_1DataDownloader_1_1DataDownloader}{\-Data\-Downloader}(con\-String)}\label{namespaceDataHandler_1_1DataDownloader_a8745af1e7397bb2d39353979d6e5e9dc}
+
+\item 
+\hypertarget{namespaceDataHandler_1_1DataDownloader_a44552424fcd868c2dca24b193adb9949}{string {\bfseries filename} = \char`\"{}../\-Series\-Info\-C\-S\-V/\-F\-X\-Series.\-csv\char`\"{}}\label{namespaceDataHandler_1_1DataDownloader_a44552424fcd868c2dca24b193adb9949}
+
+\item 
+\hypertarget{namespaceDataHandler_1_1DataDownloader_a1774ada017217cbe878d9644b27ae51d}{list {\bfseries names} = \mbox{[}str(nm) for nm in dd.\-info\-Type('\-F\-X\-Futures')\mbox{[}'\-Series\-Name'\mbox{]}\mbox{]}}\label{namespaceDataHandler_1_1DataDownloader_a1774ada017217cbe878d9644b27ae51d}
+
+\item 
+\hypertarget{namespaceDataHandler_1_1DataDownloader_a4c7a6f6d15dd67f98b45c1ff7d636a54}{tuple {\bfseries end} = (datetime.\-now().date())}\label{namespaceDataHandler_1_1DataDownloader_a4c7a6f6d15dd67f98b45c1ff7d636a54}
+
+\item 
+\hypertarget{namespaceDataHandler_1_1DataDownloader_a72d05b1a140f872400033a6680716aec}{tuple {\bfseries errortables} = dd.\-update\-Series\-Data(names, end)}\label{namespaceDataHandler_1_1DataDownloader_a72d05b1a140f872400033a6680716aec}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on Jun 13, 2013
+
+@author: phcostello
+\end{DoxyVerb}
+ 

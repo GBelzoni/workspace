@@ -1,0 +1,71 @@
+\hypertarget{namespacestrategy__tester_1_1market__data}{\section{strategy\-\_\-tester\-:\-:market\-\_\-data \-Namespace \-Reference}
+\label{namespacestrategy__tester_1_1market__data}\index{strategy\-\_\-tester\-::market\-\_\-data@{strategy\-\_\-tester\-::market\-\_\-data}}
+}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classstrategy__tester_1_1market__data_1_1market__data}{market\-\_\-data}
+\item 
+class \hyperlink{classstrategy__tester_1_1market__data_1_1simple__ma__md}{simple\-\_\-ma\-\_\-md}
+\item 
+class \hyperlink{classstrategy__tester_1_1market__data_1_1pairs__md}{pairs\-\_\-md}
+\item 
+class \hyperlink{classstrategy__tester_1_1market__data_1_1market__data__slice}{market\-\_\-data\-\_\-slice}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_a2b46078fad2ae3df501cdfd5e98f6707}{def {\bfseries read\-\_\-db}}\label{namespacestrategy__tester_1_1market__data_a2b46078fad2ae3df501cdfd5e98f6707}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_ad89f9c9abc28ca171effacd8c4dfa258}{def {\bfseries \-\_\-\-\_\-init\-\_\-\-\_\-}}\label{namespacestrategy__tester_1_1market__data_ad89f9c9abc28ca171effacd8c4dfa258}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_ad5b701cf184dcf2083249d12149d1b02}{def {\bfseries test\-\_\-pairs\-\_\-md}}\label{namespacestrategy__tester_1_1market__data_ad5b701cf184dcf2083249d12149d1b02}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_ae337cf8fab73a0b7c41ca951af2a169e}{tuple {\bfseries zoo} = importr('zoo')}\label{namespacestrategy__tester_1_1market__data_ae337cf8fab73a0b7c41ca951af2a169e}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_aff1c75c2d08118b86572f41125b2527c}{tuple {\bfseries con} = sqlite3.\-connect(\char`\"{}/home/phcostello/\-Documents/\-Data/\-Finance\-Data.\-sqlite\char`\"{})}\label{namespacestrategy__tester_1_1market__data_aff1c75c2d08118b86572f41125b2527c}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_a98f0eca26cf477610399e6b158a136ad}{tuple \hyperlink{namespacestrategy__tester_1_1market__data_a98f0eca26cf477610399e6b158a136ad}{names} = ro.\-r.\-colnames(data\-Ob)}\label{namespacestrategy__tester_1_1market__data_a98f0eca26cf477610399e6b158a136ad}
+
+\begin{DoxyCompactList}\small\item\em \-Takes input zoo object and makes data object with pandas \-Dataframe data object \#\#\#. \end{DoxyCompactList}\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_ad9a43e2bc6352bd3bce3105bf917a9b6}{tuple {\bfseries time\-\_\-stamp} = zoo.\-index(data\-Ob)}\label{namespacestrategy__tester_1_1market__data_ad9a43e2bc6352bd3bce3105bf917a9b6}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_a1c7ebb9344f7a7062aa89eecddc759df}{tuple {\bfseries \-S\-P500} = read\-\_\-db(con, \char`\"{}\-S\-P500\char`\"{})}\label{namespacestrategy__tester_1_1market__data_a1c7ebb9344f7a7062aa89eecddc759df}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_a62b9420cdf50f98a7d41a71fc1ca6af9}{tuple {\bfseries \-B\-A} = read\-\_\-db(con,\char`\"{}\-B\-A\char`\"{})}\label{namespacestrategy__tester_1_1market__data_a62b9420cdf50f98a7d41a71fc1ca6af9}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_a04db9fb5886fb39b8e9a5dc15c57c6ca}{string {\bfseries dim} = '\-Adj \-Close'}\label{namespacestrategy__tester_1_1market__data_a04db9fb5886fb39b8e9a5dc15c57c6ca}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_a72dfe95d13f68eb478f7b72a41b66784}{list {\bfseries \-S\-P500\-Ad\-Cl} = \-S\-P500\mbox{[}dim\mbox{]}}\label{namespacestrategy__tester_1_1market__data_a72dfe95d13f68eb478f7b72a41b66784}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_a2705e57cc2b3bdd5f5edefe7ff145168}{list {\bfseries \-B\-A\-Ad\-Cl} = \-B\-A\mbox{[}dim\mbox{]}}\label{namespacestrategy__tester_1_1market__data_a2705e57cc2b3bdd5f5edefe7ff145168}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_a368a35e5051f43f2164876b4cd42fe3d}{tuple {\bfseries data\-Obj} = pandas.\-merge(pandas.\-Data\-Frame(\-B\-A\-Ad\-Cl), pandas.\-Data\-Frame(\-S\-P500\-Ad\-Cl), how='inner',left\-\_\-index = \-True, right\-\_\-index = \-True)}\label{namespacestrategy__tester_1_1market__data_a368a35e5051f43f2164876b4cd42fe3d}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1market__data_ac69252bead44bd7d0073037bb0d47175}{tuple {\bfseries pmd} = \hyperlink{classstrategy__tester_1_1market__data_1_1pairs__md}{pairs\-\_\-md}(data\-Ob=data\-Obj,x\-Ind='x',y\-Ind='y')}\label{namespacestrategy__tester_1_1market__data_ac69252bead44bd7d0073037bb0d47175}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on Nov 21, 2012
+
+@author: phcostello
+\end{DoxyVerb}
+ 

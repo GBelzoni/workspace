@@ -1,0 +1,119 @@
+\hypertarget{namespacestrategy__tester_1_1Portfolio}{\section{strategy\-\_\-tester\-:\-:\-Portfolio \-Namespace \-Reference}
+\label{namespacestrategy__tester_1_1Portfolio}\index{strategy\-\_\-tester\-::\-Portfolio@{strategy\-\_\-tester\-::\-Portfolio}}
+}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classstrategy__tester_1_1Portfolio_1_1PortfolioError}{\-Portfolio\-Error}
+\item 
+class \hyperlink{classstrategy__tester_1_1Portfolio_1_1Portfolio}{\-Portfolio}
+\item 
+class \hyperlink{classstrategy__tester_1_1Portfolio_1_1PortfolioSlice}{\-Portfolio\-Slice}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a865332bd518d38680c19a22fb19e78fb}{float {\bfseries r} = 0.\-05}\label{namespacestrategy__tester_1_1Portfolio_a865332bd518d38680c19a22fb19e78fb}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a777025b94f1bd542dd13598a9dfbe268}{float {\bfseries dividend} = 0.\-0}\label{namespacestrategy__tester_1_1Portfolio_a777025b94f1bd542dd13598a9dfbe268}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_ab6afa969246383b8c4ad23385bdedfe1}{float {\bfseries vol} = 0.\-1}\label{namespacestrategy__tester_1_1Portfolio_ab6afa969246383b8c4ad23385bdedfe1}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a956289b9011a9fa4111dca449f6ffd34}{float {\bfseries \-S} = 100.\-0}\label{namespacestrategy__tester_1_1Portfolio_a956289b9011a9fa4111dca449f6ffd34}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_abaca80639ef61b66ad45edcc00223a19}{float {\bfseries t0} = 0.\-0}\label{namespacestrategy__tester_1_1Portfolio_abaca80639ef61b66ad45edcc00223a19}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a2e902936db32c8208184e4b946209307}{float {\bfseries expiry} = 0.\-001}\label{namespacestrategy__tester_1_1Portfolio_a2e902936db32c8208184e4b946209307}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a02a4ad339c5f3f646b01ebc2463cfff0}{float {\bfseries \-K} = 100.\-0}\label{namespacestrategy__tester_1_1Portfolio_a02a4ad339c5f3f646b01ebc2463cfff0}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a183b61be4e04b750983ff511c25bdda7}{tuple {\bfseries data} = np.\-array(\mbox{[}r,\-S,vol\mbox{]})}\label{namespacestrategy__tester_1_1Portfolio_a183b61be4e04b750983ff511c25bdda7}
+
+\item 
+list {\bfseries columns}
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a2e3374af0544516333e4f59ae2a450ee}{tuple {\bfseries md1} = md.\-market\-\_\-data(data)}\label{namespacestrategy__tester_1_1Portfolio_a2e3374af0544516333e4f59ae2a450ee}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a8827b8e775691d80d144f9ecc32513bf}{tuple {\bfseries md\-\_\-slice} = md.\-market\-\_\-data\-\_\-slice(md1,time\-\_\-index=0)}\label{namespacestrategy__tester_1_1Portfolio_a8827b8e775691d80d144f9ecc32513bf}
+
+\item 
+tuple {\bfseries trade\-Call}
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a4d6fed98e8e0cfa9848a137414d30f6a}{tuple {\bfseries price} = trade\-Call.\-price(md\-\_\-slice)}\label{namespacestrategy__tester_1_1Portfolio_a4d6fed98e8e0cfa9848a137414d30f6a}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a68f9d81793e1cf34f97c0382945d5491}{tuple {\bfseries delta} = trade\-Call.\-delta(md\-\_\-slice)}\label{namespacestrategy__tester_1_1Portfolio_a68f9d81793e1cf34f97c0382945d5491}
+
+\item 
+tuple {\bfseries trade\-Equity}
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a93a5782bed3b657dcd4d083ce8f36281}{tuple {\bfseries port1} = \hyperlink{classstrategy__tester_1_1Portfolio_1_1Portfolio}{\-Portfolio}(\char`\"{}port1\char`\"{}, cash\-Amt = 100, rate\-\_\-\-Label\-\_\- = 'rate')}\label{namespacestrategy__tester_1_1Portfolio_a93a5782bed3b657dcd4d083ce8f36281}
+
+\item 
+tuple {\bfseries port1\-Slice}
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_aa366191466e4b0e97662378ea52b31d0}{tuple {\bfseries prt1\-Val} = port1\-Slice.\-value()}\label{namespacestrategy__tester_1_1Portfolio_aa366191466e4b0e97662378ea52b31d0}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a7064c5a0b2943f8f5df9060422cf2766}{tuple {\bfseries prt1\-Del} = port1\-Slice.\-delta()}\label{namespacestrategy__tester_1_1Portfolio_a7064c5a0b2943f8f5df9060422cf2766}
+
+\item 
+\hypertarget{namespacestrategy__tester_1_1Portfolio_ab5eaa0afdb6b416591e79450a5503caa}{dictionary {\bfseries adj\-Notional} = \{ '\-Call'\-: 0.\-5 , '\-Equity'\-: 1\}}\label{namespacestrategy__tester_1_1Portfolio_ab5eaa0afdb6b416591e79450a5503caa}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on Nov 29, 2012
+
+@author: phcostello
+\end{DoxyVerb}
+ 
+
+\subsection{\-Variable \-Documentation}
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a3019ce96c08e21a3e2eee59ddc0e2039}{\index{strategy\-\_\-tester\-::\-Portfolio@{strategy\-\_\-tester\-::\-Portfolio}!columns@{columns}}
+\index{columns@{columns}!strategy_tester::Portfolio@{strategy\-\_\-tester\-::\-Portfolio}}
+\subsubsection[{columns}]{\setlength{\rightskip}{0pt plus 5cm}list strategy\-\_\-tester\-::\-Portfolio\-::columns}}\label{namespacestrategy__tester_1_1Portfolio_a3019ce96c08e21a3e2eee59ddc0e2039}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+1 ["rate",
+2                "underlying",
+3                "vol"]
+\end{DoxyCode}
+\hypertarget{namespacestrategy__tester_1_1Portfolio_aa551d54e9ed0aeec6f43836bbc9de7b1}{\index{strategy\-\_\-tester\-::\-Portfolio@{strategy\-\_\-tester\-::\-Portfolio}!port1\-Slice@{port1\-Slice}}
+\index{port1\-Slice@{port1\-Slice}!strategy_tester::Portfolio@{strategy\-\_\-tester\-::\-Portfolio}}
+\subsubsection[{port1\-Slice}]{\setlength{\rightskip}{0pt plus 5cm}tuple strategy\-\_\-tester\-::\-Portfolio\-::port1\-Slice}}\label{namespacestrategy__tester_1_1Portfolio_aa551d54e9ed0aeec6f43836bbc9de7b1}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+1 PortfolioSlice(portfolio = port1, 
+2                                 market_data= md1, 
+3                                 time_index = 0)
+\end{DoxyCode}
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a00bea9fbe56bb9efd1232b4a9c1f2dc9}{\index{strategy\-\_\-tester\-::\-Portfolio@{strategy\-\_\-tester\-::\-Portfolio}!trade\-Call@{trade\-Call}}
+\index{trade\-Call@{trade\-Call}!strategy_tester::Portfolio@{strategy\-\_\-tester\-::\-Portfolio}}
+\subsubsection[{trade\-Call}]{\setlength{\rightskip}{0pt plus 5cm}tuple strategy\-\_\-tester\-::\-Portfolio\-::trade\-Call}}\label{namespacestrategy__tester_1_1Portfolio_a00bea9fbe56bb9efd1232b4a9c1f2dc9}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+1 td.TradeVanillaEuroCall(name = "Call",
+2                                         notional = 1,
+3                                         strike = 100,
+4                                         expiry = 0.5)
+\end{DoxyCode}
+\hypertarget{namespacestrategy__tester_1_1Portfolio_a08d7e6652b7acb7c5460b4aaa121dd46}{\index{strategy\-\_\-tester\-::\-Portfolio@{strategy\-\_\-tester\-::\-Portfolio}!trade\-Equity@{trade\-Equity}}
+\index{trade\-Equity@{trade\-Equity}!strategy_tester::Portfolio@{strategy\-\_\-tester\-::\-Portfolio}}
+\subsubsection[{trade\-Equity}]{\setlength{\rightskip}{0pt plus 5cm}tuple strategy\-\_\-tester\-::\-Portfolio\-::trade\-Equity}}\label{namespacestrategy__tester_1_1Portfolio_a08d7e6652b7acb7c5460b4aaa121dd46}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+1 td.TradeEquity(name = "Equity", 
+2                                  notional = 1, 
+3                                  price_series_label = "underlying")
+\end{DoxyCode}

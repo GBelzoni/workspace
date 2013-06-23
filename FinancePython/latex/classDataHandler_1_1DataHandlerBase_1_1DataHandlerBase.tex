@@ -1,0 +1,113 @@
+\hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase}{\section{\-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base \-Class \-Reference}
+\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase}\index{\-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base@{\-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base}}
+}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a12811fd67ed82ee69472555a958c7d00}{\-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def \hyperlink{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ab7b1566486dd284bb3fbe3dc05f2fd13}{connect}
+\item 
+def \hyperlink{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a5845568145e08f4317becd943e792bc8}{disconnect}
+\item 
+def \hyperlink{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a2f76b727ce32f1b057e5764cebbe44aa}{info\-Type}
+\item 
+def \hyperlink{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a0299f89e49faab52e257ef68786a450a}{info\-Series}
+\item 
+def \hyperlink{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ac55bec7be3b98c19ed5a5968caaf5ce4}{list\-Types}
+\item 
+def \hyperlink{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a923bf4fd475d9095d688bb1ca4a65a76}{list\-Series}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ae993313ec360c8a18a56ec57107c1914}{{\bfseries con\-String}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ae993313ec360c8a18a56ec57107c1914}
+
+\item 
+\hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ab1697cc5009fade9c79efaab34093f4f}{{\bfseries con}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ab1697cc5009fade9c79efaab34093f4f}
+
+\item 
+\hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a15a1abefacd08e9c189e17cb1b34f108}{{\bfseries series\-List}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a15a1abefacd08e9c189e17cb1b34f108}
+
+\item 
+\hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a7d5dd00d19c83006cb4ac55bef17f9f5}{{\bfseries quandl\-Auth\-Token}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a7d5dd00d19c83006cb4ac55bef17f9f5}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Base class for interacting with finance database
+Has constructor and db connect/disconnect funtions
+Has general info retrieval about the db functions 
+\end{DoxyVerb}
+ 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a12811fd67ed82ee69472555a958c7d00}{\index{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!DataHandler::DataHandlerBase::DataHandlerBase@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{con\-String}
+\end{DoxyParamCaption}
+)}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a12811fd67ed82ee69472555a958c7d00}
+\begin{DoxyVerb}Constructor - takes path_string to location of database \end{DoxyVerb}
+ 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ab7b1566486dd284bb3fbe3dc05f2fd13}{\index{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}!connect@{connect}}
+\index{connect@{connect}!DataHandler::DataHandlerBase::DataHandlerBase@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}}
+\subsubsection[{connect}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base.\-connect} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ab7b1566486dd284bb3fbe3dc05f2fd13}
+\begin{DoxyVerb}connect to the constring data member \end{DoxyVerb}
+ \hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a5845568145e08f4317becd943e792bc8}{\index{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!DataHandler::DataHandlerBase::DataHandlerBase@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}}
+\subsubsection[{disconnect}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base.\-disconnect} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a5845568145e08f4317becd943e792bc8}
+\begin{DoxyVerb}disconnect from the db \end{DoxyVerb}
+ \hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a0299f89e49faab52e257ef68786a450a}{\index{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}!info\-Series@{info\-Series}}
+\index{info\-Series@{info\-Series}!DataHandler::DataHandlerBase::DataHandlerBase@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}}
+\subsubsection[{info\-Series}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base.\-info\-Series} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{series\-List}
+\end{DoxyParamCaption}
+)}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a0299f89e49faab52e257ef68786a450a}
+\begin{DoxyVerb}Returns db info for series in list. Make sure arg is a list even in case of one series \end{DoxyVerb}
+ \hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a2f76b727ce32f1b057e5764cebbe44aa}{\index{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}!info\-Type@{info\-Type}}
+\index{info\-Type@{info\-Type}!DataHandler::DataHandlerBase::DataHandlerBase@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}}
+\subsubsection[{info\-Type}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base.\-info\-Type} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{series\-Type}
+\end{DoxyParamCaption}
+)}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a2f76b727ce32f1b057e5764cebbe44aa}
+\begin{DoxyVerb}Returns db info corresponding to all of a given seriesType \end{DoxyVerb}
+ \hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a923bf4fd475d9095d688bb1ca4a65a76}{\index{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}!list\-Series@{list\-Series}}
+\index{list\-Series@{list\-Series}!DataHandler::DataHandlerBase::DataHandlerBase@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}}
+\subsubsection[{list\-Series}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base.\-list\-Series} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_a923bf4fd475d9095d688bb1ca4a65a76}
+\begin{DoxyVerb}Returns existing series currently in db. Good for checking if doubling up\end{DoxyVerb}
+ \hypertarget{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ac55bec7be3b98c19ed5a5968caaf5ce4}{\index{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}!list\-Types@{list\-Types}}
+\index{list\-Types@{list\-Types}!DataHandler::DataHandlerBase::DataHandlerBase@{\-Data\-Handler\-::\-Data\-Handler\-Base\-::\-Data\-Handler\-Base}}
+\subsubsection[{list\-Types}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Data\-Handler.\-Data\-Handler\-Base.\-Data\-Handler\-Base.\-list\-Types} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classDataHandler_1_1DataHandlerBase_1_1DataHandlerBase_ac55bec7be3b98c19ed5a5968caaf5ce4}
+\begin{DoxyVerb}Returns the existing types of series currently in db\end{DoxyVerb}
+ 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Data\-Handler/\-Data\-Handler\-Base.\-py\end{DoxyCompactItemize}

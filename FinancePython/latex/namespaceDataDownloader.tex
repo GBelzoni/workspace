@@ -1,0 +1,41 @@
+\hypertarget{namespaceDataDownloader}{\section{\-Data\-Downloader \-Namespace \-Reference}
+\label{namespaceDataDownloader}\index{\-Data\-Downloader@{\-Data\-Downloader}}
+}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classDataDownloader_1_1DataDownloader}{\-Data\-Downloader}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceDataDownloader_ad91e77a4010bea0da9c529dc7af14f99}{tuple {\bfseries t} = datetime.\-now()}\label{namespaceDataDownloader_ad91e77a4010bea0da9c529dc7af14f99}
+
+\item 
+\hypertarget{namespaceDataDownloader_a0ab4dcb24c02a90f81afad69bf7a0aca}{string {\bfseries con\-String} = \char`\"{}/home/phcostello/\-Documents/\-Data/\-Finance\-Data.\-sqlite\char`\"{}}\label{namespaceDataDownloader_a0ab4dcb24c02a90f81afad69bf7a0aca}
+
+\item 
+\hypertarget{namespaceDataDownloader_a1a78c96e92ee11aac380ffe265c82c77}{tuple {\bfseries dd} = \hyperlink{classDataDownloader_1_1DataDownloader}{\-Data\-Downloader}(con\-String)}\label{namespaceDataDownloader_a1a78c96e92ee11aac380ffe265c82c77}
+
+\item 
+\hypertarget{namespaceDataDownloader_a91b3732bc4afcd5e35d0bcea74afb3d6}{string {\bfseries filename} = \char`\"{}\-F\-X\-Series.\-csv\char`\"{}}\label{namespaceDataDownloader_a91b3732bc4afcd5e35d0bcea74afb3d6}
+
+\item 
+\hypertarget{namespaceDataDownloader_a6997ce2b3746fe697199c757441c9d86}{list {\bfseries names} = \mbox{[}str(nm) for nm in dd.\-info\-Type('\-F\-X\-Futures')\mbox{[}'\-Series\-Name'\mbox{]}\mbox{]}}\label{namespaceDataDownloader_a6997ce2b3746fe697199c757441c9d86}
+
+\item 
+\hypertarget{namespaceDataDownloader_abf23516cbcb3506d8acf81bb79dedd41}{tuple {\bfseries end} = (datetime.\-now().date())}\label{namespaceDataDownloader_abf23516cbcb3506d8acf81bb79dedd41}
+
+\item 
+\hypertarget{namespaceDataDownloader_a09fa1dc5d1124369729a0a2fa8be8baa}{tuple {\bfseries errortables} = dd.\-update\-Series\-Data(names, end)}\label{namespaceDataDownloader_a09fa1dc5d1124369729a0a2fa8be8baa}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on Jun 13, 2013
+
+@author: phcostello
+\end{DoxyVerb}
+ 

@@ -1,0 +1,63 @@
+\hypertarget{namespaceRenameAdjClose}{\section{\-Rename\-Adj\-Close \-Namespace \-Reference}
+\label{namespaceRenameAdjClose}\index{\-Rename\-Adj\-Close@{\-Rename\-Adj\-Close}}
+}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceRenameAdjClose_a7f5990cf9f338e6fc26d91e17a7662d7}{string {\bfseries con\-String} = \char`\"{}/home/phcostello/\-Documents/\-Data/\-Finance\-Data.\-sqlite\char`\"{}}\label{namespaceRenameAdjClose_a7f5990cf9f338e6fc26d91e17a7662d7}
+
+\item 
+\hypertarget{namespaceRenameAdjClose_a37dd2be426b1b0527e0bb6fb3eea805d}{tuple {\bfseries ddown} = dd.\-Data\-Downloader(con\-String)}\label{namespaceRenameAdjClose_a37dd2be426b1b0527e0bb6fb3eea805d}
+
+\item 
+\hypertarget{namespaceRenameAdjClose_aa78fcc559331108cab45f47cd8ee466c}{{\bfseries con} = ddown.\-con}\label{namespaceRenameAdjClose_aa78fcc559331108cab45f47cd8ee466c}
+
+\item 
+\hypertarget{namespaceRenameAdjClose_a62d26d4e083b2e8fb6c3759f7da6fbaf}{tuple {\bfseries series} = ddown.\-list\-Series()}\label{namespaceRenameAdjClose_a62d26d4e083b2e8fb6c3759f7da6fbaf}
+
+\item 
+list {\bfseries sql\-Column\-Rename}
+\item 
+\hypertarget{namespaceRenameAdjClose_a34db501b2f10ef9b22a0f0e2b797f7cb}{tuple {\bfseries start} = datetime(2013,2,21)}\label{namespaceRenameAdjClose_a34db501b2f10ef9b22a0f0e2b797f7cb}
+
+\item 
+\hypertarget{namespaceRenameAdjClose_af26985d65e00654284e69af2591e655b}{tuple {\bfseries end} = datetime.\-date(datetime.\-now())}\label{namespaceRenameAdjClose_af26985d65e00654284e69af2591e655b}
+
+\item 
+\hypertarget{namespaceRenameAdjClose_aeb49c9e2ac3dfe0bf0e6a71a7e7c638e}{tuple {\bfseries data} = ddown.\-read\-Data( u'\-A\-T\-I', 'yahoo', start, end)}\label{namespaceRenameAdjClose_aeb49c9e2ac3dfe0bf0e6a71a7e7c638e}
+
+\item 
+\hypertarget{namespaceRenameAdjClose_ae4d1dad3c44f47ba938c6efcb6258775}{tuple {\bfseries dlist} = list(data.\-columns)}\label{namespaceRenameAdjClose_ae4d1dad3c44f47ba938c6efcb6258775}
+
+\item 
+\hypertarget{namespaceRenameAdjClose_a539ca6dc5884fc055bab670266ee3d86}{tuple {\bfseries df2} = psql.\-read\-\_\-frame(\char`\"{}\-S\-E\-L\-E\-C\-T $\ast$ \-F\-R\-O\-M \-All\-\_\-\-Ordinaries\char`\"{},con)}\label{namespaceRenameAdjClose_a539ca6dc5884fc055bab670266ee3d86}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on Jun 14, 2013
+
+@author: phcostello
+\end{DoxyVerb}
+ 
+
+\subsection{\-Variable \-Documentation}
+\hypertarget{namespaceRenameAdjClose_a0e33cd64fe2bbebc3ebe3501fe08bc1d}{\index{\-Rename\-Adj\-Close@{\-Rename\-Adj\-Close}!sql\-Column\-Rename@{sql\-Column\-Rename}}
+\index{sql\-Column\-Rename@{sql\-Column\-Rename}!RenameAdjClose@{\-Rename\-Adj\-Close}}
+\subsubsection[{sql\-Column\-Rename}]{\setlength{\rightskip}{0pt plus 5cm}list \-Rename\-Adj\-Close\-::sql\-Column\-Rename}}\label{namespaceRenameAdjClose_a0e33cd64fe2bbebc3ebe3501fe08bc1d}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+1 [
+2                    'ALTER TABLE "main"."{0}" RENAME TO "
+      oXHFcGcd04oXHFcGcd04_{0}"'.format(name),
+3                    'CREATE TABLE "main"."{0}" ("Date" DATETIME,"Open" REAL,"
+      High" REAL,"Low" REAL,"Close" REAL,"Volume" INTEGER,"Adj_Close" REAL)'.format(name)
+      , 
+4                    'INSERT INTO "main"."{0}" SELECT "Date","Open","High","Low",
+      "Close","Volume","Adj Close" FROM "main"."oXHFcGcd04oXHFcGcd04_{0}"'.format(name
+      ),
+5                    'DROP TABLE "main"."oXHFcGcd04oXHFcGcd04_{0}"'.format(name)
+6                    ]
+\end{DoxyCode}

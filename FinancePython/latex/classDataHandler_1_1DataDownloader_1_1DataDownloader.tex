@@ -1,0 +1,59 @@
+\hypertarget{classDataHandler_1_1DataDownloader_1_1DataDownloader}{\section{\-Data\-Handler.\-Data\-Downloader.\-Data\-Downloader \-Class \-Reference}
+\label{classDataHandler_1_1DataDownloader_1_1DataDownloader}\index{\-Data\-Handler.\-Data\-Downloader.\-Data\-Downloader@{\-Data\-Handler.\-Data\-Downloader.\-Data\-Downloader}}
+}
+
+
+\-Inherits \-Data\-Handler\-Base.
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classDataHandler_1_1DataDownloader_1_1DataDownloader_a64cbd909b85c3d7daa50dd8d4194a3fd}{update\-Range\-Info}
+\item 
+\hypertarget{classDataHandler_1_1DataDownloader_1_1DataDownloader_a94245fe8ef3739bad8abb9b9ca23b7cd}{def {\bfseries update\-Series\-Data}}\label{classDataHandler_1_1DataDownloader_1_1DataDownloader_a94245fe8ef3739bad8abb9b9ca23b7cd}
+
+\item 
+def \hyperlink{classDataHandler_1_1DataDownloader_1_1DataDownloader_a7a1f87d338de93f7d1b76511665a33fb}{read\-Data}
+\item 
+\hypertarget{classDataHandler_1_1DataDownloader_1_1DataDownloader_abf0ed992ace6d6b5bb85172a0a1545f1}{def {\bfseries write\-Frame\-To\-D\-B}}\label{classDataHandler_1_1DataDownloader_1_1DataDownloader_abf0ed992ace6d6b5bb85172a0a1545f1}
+
+\item 
+\hypertarget{classDataHandler_1_1DataDownloader_1_1DataDownloader_adf48253e388c86e5ce023a83f443c019}{def {\bfseries add\-Series\-To\-Update\-List}}\label{classDataHandler_1_1DataDownloader_1_1DataDownloader_adf48253e388c86e5ce023a83f443c019}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}This class handles updating the series tracked, and handles downloading data\end{DoxyVerb}
+ 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classDataHandler_1_1DataDownloader_1_1DataDownloader_a7a1f87d338de93f7d1b76511665a33fb}{\index{\-Data\-Handler\-::\-Data\-Downloader\-::\-Data\-Downloader@{\-Data\-Handler\-::\-Data\-Downloader\-::\-Data\-Downloader}!read\-Data@{read\-Data}}
+\index{read\-Data@{read\-Data}!DataHandler::DataDownloader::DataDownloader@{\-Data\-Handler\-::\-Data\-Downloader\-::\-Data\-Downloader}}
+\subsubsection[{read\-Data}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Data\-Handler.\-Data\-Downloader.\-Data\-Downloader.\-read\-Data} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{lookup\-Ticker, }
+\item[{}]{source, }
+\item[{}]{start, }
+\item[{}]{end}
+\end{DoxyParamCaption}
+)}}\label{classDataHandler_1_1DataDownloader_1_1DataDownloader_a7a1f87d338de93f7d1b76511665a33fb}
+\begin{DoxyVerb}Read the data - assumes start and end are datetime.date objects\end{DoxyVerb}
+ \hypertarget{classDataHandler_1_1DataDownloader_1_1DataDownloader_a64cbd909b85c3d7daa50dd8d4194a3fd}{\index{\-Data\-Handler\-::\-Data\-Downloader\-::\-Data\-Downloader@{\-Data\-Handler\-::\-Data\-Downloader\-::\-Data\-Downloader}!update\-Range\-Info@{update\-Range\-Info}}
+\index{update\-Range\-Info@{update\-Range\-Info}!DataHandler::DataDownloader::DataDownloader@{\-Data\-Handler\-::\-Data\-Downloader\-::\-Data\-Downloader}}
+\subsubsection[{update\-Range\-Info}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Data\-Handler.\-Data\-Downloader.\-Data\-Downloader.\-update\-Range\-Info} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{series\-Names, }
+\item[{}]{logfile = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}}\label{classDataHandler_1_1DataDownloader_1_1DataDownloader_a64cbd909b85c3d7daa50dd8d4194a3fd}
+\begin{DoxyVerb}updates the range info in seriesList so that it matches what's in db.
+should be run before/after importing new series
+\end{DoxyVerb}
+ 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Data\-Handler/\-Data\-Downloader.\-py\end{DoxyCompactItemize}
